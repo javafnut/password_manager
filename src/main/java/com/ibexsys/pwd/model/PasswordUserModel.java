@@ -4,6 +4,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
+import java.util.List;
 
 @XmlRootElement(name = "PwdUserModel")
 public class PasswordUserModel {
@@ -20,8 +21,8 @@ public class PasswordUserModel {
 		return siteList;
 	}
 
-	public void setSiteList(ArrayList<Site> pSiteList) {
-		siteList = pSiteList;
+	public void setSiteList(ArrayList<Site> siteList2) {
+		siteList = siteList2;
 	}
 
 	public String getPwdFileName() {
