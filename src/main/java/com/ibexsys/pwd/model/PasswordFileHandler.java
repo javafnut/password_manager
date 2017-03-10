@@ -5,12 +5,12 @@ import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
 
-@XmlRootElement(name = "passwordFile")
+@XmlRootElement(name = "PwdUserModel")
 public class PasswordFileHandler {
 
 	// XmLElementWrapper generates a wrapper element around XML representation
-	@XmlElementWrapper(name = "siteList")
-	@XmlElement(name = "site")
+	@XmlElementWrapper(name = "UserSiteList")
+	@XmlElement(name = "Site")
 
 	private ArrayList<Site> siteList;
 	private String pwdFileName;

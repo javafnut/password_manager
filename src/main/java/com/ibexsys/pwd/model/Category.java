@@ -2,11 +2,6 @@ package com.ibexsys.pwd.model;
 
 import java.util.Date;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-
-@XmlRootElement(name = "Category")
 public class Category {
 	private long catId;
 	private long userId;
@@ -17,7 +12,6 @@ public class Category {
 	private Date createDate;
 	private Date modDate;
 
-	@XmlAttribute
 	public long getCatId() {
 		return catId;
 	}
@@ -26,7 +20,6 @@ public class Category {
 		this.catId = catId;
 	}
 
-	@XmlElement(name = "cat-name")
 	public String getName() {
 		return name;
 	}
@@ -35,7 +28,6 @@ public class Category {
 		this.name = name;
 	}
 
-	@XmlElement(name = "desc")
 	public String getDescription() {
 		return description;
 	}
@@ -44,7 +36,6 @@ public class Category {
 		this.description = description;
 	}
 
-	@XmlElement(name = "parentID")
 	public long getParentId() {
 		return parentId;
 	}
@@ -53,7 +44,6 @@ public class Category {
 		this.parentId = parentId;
 	}
 
-	@XmlElement(name = "childID")
 	public long getChildId() {
 		return childId;
 	}
@@ -62,7 +52,6 @@ public class Category {
 		this.childId = childId;
 	}
 
-	@XmlElement(name = "userID")
 	public long getUserId() {
 		return userId;
 	}
@@ -71,7 +60,6 @@ public class Category {
 		this.userId = userId;
 	}
 
-	@XmlElement(name = "created")
 	public Date getCreateDate() {
 		return createDate;
 	}
@@ -80,7 +68,6 @@ public class Category {
 		this.createDate = createDate;
 	}
 
-	@XmlElement(name = "modified")
 	public Date getModDate() {
 		return modDate;
 	}

@@ -2,13 +2,11 @@ package com.ibexsys.pwd.model;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 import java.util.Arrays;
 import java.util.Date;
 
-@XmlRootElement(name = "Site")
 @XmlType(propOrder = { "siteName", "catId", "siteURL", "siteLogin", "password", "notes", "createDate", "modDate" })
 public class Site {
 
@@ -35,7 +33,7 @@ public class Site {
 		this.siteId = siteId;
 	}
 
-	@XmlElement(name = "site-name")
+	@XmlElement(name = "name")
 	public String getSiteName() {
 		return siteName;
 	}
@@ -44,7 +42,7 @@ public class Site {
 		this.siteName = siteName;
 	}
 
-	@XmlElement(name = "site-catID")
+	@XmlElement(name = "catID")
 	public long getCatId() {
 		return catId;
 	}
@@ -61,7 +59,7 @@ public class Site {
 		this.appUserId = appUserId;
 	}
 
-	@XmlElement(name = "site-URL")
+	@XmlElement(name = "URL")
 	public String getSiteURL() {
 		return siteURL;
 	}
@@ -70,7 +68,7 @@ public class Site {
 		this.siteURL = siteURL;
 	}
 
-	@XmlElement(name = "site-login")
+	@XmlElement(name = "login")
 	public String getSiteLogin() {
 		return siteLogin;
 	}
@@ -79,7 +77,7 @@ public class Site {
 		this.siteLogin = siteLogin;
 	}
 
-	@XmlElement(name = "site-password")
+	@XmlElement(name = "password")
 	public byte[] getPassword() {
 		return password;
 	}
@@ -95,7 +93,7 @@ public class Site {
 		return notes;
 	}
 
-	@XmlElement(name = "site-notes")
+	@XmlElement(name = "notes")
 	public void setNotes(String notes) {
 		this.notes = notes;
 	}

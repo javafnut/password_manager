@@ -1,12 +1,5 @@
 package com.ibexsys.pwd.model;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-
-@XmlRootElement(name = "Password-Criteria")
-@XmlAccessorType(XmlAccessType.FIELD)
 public class PasswordCriteria {
 
 	public static final String ALPHA_CHARS_UPPER_CASE = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -22,7 +15,6 @@ public class PasswordCriteria {
 	private boolean numericChars = true;
 	private boolean isOtherChars = true;
 
-	@XmlElement(name = "pwd-length")
 	public int getPwdLen() {
 		return pwdLen;
 	}
@@ -31,7 +23,6 @@ public class PasswordCriteria {
 		this.pwdLen = pwdLen;
 	}
 
-	@XmlElement
 	public boolean isAlphaUpperChars() {
 		return alphaUpperChars;
 	}
@@ -40,7 +31,6 @@ public class PasswordCriteria {
 		this.alphaUpperChars = alphaUpperChars;
 	}
 
-	@XmlElement
 	public boolean isAlphaLowerChars() {
 		return alphaLowerChars;
 	}
@@ -49,7 +39,6 @@ public class PasswordCriteria {
 		this.alphaLowerChars = alphaLowerChars;
 	}
 
-	@XmlElement
 	public boolean isNumericChars() {
 		return numericChars;
 	}
@@ -58,50 +47,30 @@ public class PasswordCriteria {
 		this.numericChars = numericChars;
 	}
 
-	@XmlElement
 	public boolean isOtherChars() {
 		return isOtherChars;
 	}
 
-	/**
-	 * @param isOtherChars
-	 *            the isOtherChars to set
-	 */
 	public void setOtherChars(boolean isOtherChars) {
 		this.isOtherChars = isOtherChars;
 	}
 
-	/**
-	 * @return the alphaCharsUpperCase
-	 */
 	public static String getAlphaCharsUpperCase() {
 		return ALPHA_CHARS_UPPER_CASE;
 	}
 
-	/**
-	 * @return the alphaCharsLowerCase
-	 */
 	public static String getAlphaCharsLowerCase() {
 		return ALPHA_CHARS_LOWER_CASE;
 	}
 
-	/**
-	 * @return the numericChars
-	 */
 	public static String getNumericChars() {
 		return NUMERIC_CHARS;
 	}
 
-	/**
-	 * @return the otherChars
-	 */
 	public static String getOtherChars() {
 		return OTHER_CHARS;
 	}
 
-	/**
-	 * @return the defaultLen
-	 */
 	public static int getDefaultLen() {
 		return DEFAULT_LEN;
 	}
