@@ -5,7 +5,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
 import java.util.Arrays;
-import java.util.Date;
+import java.sql.Timestamp;
 
 @XmlType(propOrder = { "siteName", "catId", "siteURL", "siteLogin", "password", "notes", "createDate", "modDate" })
 public class Site {
@@ -20,9 +20,8 @@ public class Site {
 	private byte[] password;
 	private String notes;
 
-	// Change To Date
-	private Date createDate;
-	private Date modDate;
+	private Timestamp createDTM;
+	private Timestamp modifiedDTM;
 
 	@XmlAttribute(name = "SiteID")
 	public long getSiteId() {
@@ -99,25 +98,21 @@ public class Site {
 	}
 
 	@XmlElement(name = "created")
-	public Date getCreateDate() {
-		return createDate;
+	public Timestamp getCreateDTM() {
+		return createDTM;
 	}
 
-	public void setCreateDate(Date date) {
-		this.createDate = date;
+	public void setCreateDTM(Timestamp created) {
+		this.createDTM = created;
 	}
 
 	@XmlElement(name = "modified")
-	public Date getModDate() {
-		return modDate;
+	public Timestamp getModifiedDTM() {
+		return modifiedDTM;
 	}
 
-	/**
-	 * @param modDate
-	 *            the modDate to set
-	 */
-	public void setModDate(Date modDate) {
-		this.modDate = modDate;
+	public void setModifiedDTM(Timestamp modDTM) {
+		this.modifiedDTM = modDTM;
 	}
 
 	@Override
@@ -126,8 +121,8 @@ public class Site {
 		int result = 1;
 		result = prime * result + (int) (appUserId ^ (appUserId >>> 32));
 		result = prime * result + (int) (catId ^ (catId >>> 32));
-		result = prime * result + ((createDate == null) ? 0 : createDate.hashCode());
-		result = prime * result + ((modDate == null) ? 0 : modDate.hashCode());
+		result = prime * result + ((createDTM == null) ? 0 : createDTM.hashCode());
+		result = prime * result + ((modifiedDTM == null) ? 0 : modifiedDTM.hashCode());
 		result = prime * result + ((notes == null) ? 0 : notes.hashCode());
 		result = prime * result + Arrays.hashCode(password);
 		result = prime * result + (int) (siteId ^ (siteId >>> 32));
@@ -150,15 +145,15 @@ public class Site {
 			return false;
 		if (catId != other.catId)
 			return false;
-		if (createDate == null) {
-			if (other.createDate != null)
+		if (createDTM == null) {
+			if (other.createDTM != null)
 				return false;
-		} else if (!createDate.equals(other.createDate))
+		} else if (!createDTM.equals(other.createDTM))
 			return false;
-		if (modDate == null) {
-			if (other.modDate != null)
+		if (modifiedDTM == null) {
+			if (other.modifiedDTM != null)
 				return false;
-		} else if (!modDate.equals(other.modDate))
+		} else if (!modifiedDTM.equals(other.modifiedDTM))
 			return false;
 		if (notes == null) {
 			if (other.notes != null)
@@ -191,7 +186,7 @@ public class Site {
 	public String toString() {
 		return "Site [siteId=" + siteId + ", siteName=" + siteName + ", catId=" + catId + ", appUserId=" + appUserId
 				+ ", siteURL=" + siteURL + ", siteLogin=" + siteLogin + ", password=" + Arrays.toString(password)
-				+ ", notes=" + notes + ", createDate=" + createDate + ", modDate=" + modDate + "]";
+				+ ", notes=" + notes + ", createDTM=" + createDTM + ", modifiedDTM=" + modifiedDTM + "]";
 	}
 
 }

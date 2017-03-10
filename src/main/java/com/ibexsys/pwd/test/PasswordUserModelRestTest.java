@@ -1,12 +1,13 @@
 package com.ibexsys.pwd.test;
 
-
-import java.util.Date;
+import java.sql.Timestamp;
 import java.util.List;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Map;
+import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -27,10 +28,8 @@ import javax.ws.rs.core.UriInfo;
 
 import org.springframework.stereotype.Component;
 
-
 import com.ibexsys.pwd.model.AppUser;
 import com.ibexsys.pwd.model.Category;
-import com.ibexsys.pwd.model.PasswordCriteria;
 import com.ibexsys.pwd.model.PasswordUserModel;
 import com.ibexsys.pwd.model.Site;
 
@@ -40,84 +39,129 @@ import com.ibexsys.pwd.services.PasswordEncryptionService;
 @Path("/testpwd")
 public class PasswordUserModelRestTest {
 
-	private static Map<Integer, PasswordUserModel> pwdUserDB = new ConcurrentHashMap<Integer, PasswordUserModel>();
 	private static AtomicInteger idCounter = new AtomicInteger();
 	private static PasswordUserModel pwdUserModel = new PasswordUserModel();
-	private static int NUM_SITES_MAX_PER_CATEGORY = 10;
-	private static ArrayList<Site> siteList = new ArrayList<Site>();
-	
-	
-	static{
-		
+
+	static {
+
+		int NUM_SITES_MAX_PER_CATEGORY = 10;
+		int NUM_CATEGORY_MAX = 10;
+
 		String pwd = "()ThisIsATestPassword!@44";
 		byte[] lSalt = null;
-	    byte[] lEncPwd = null;
-		boolean isValid = false;
-		
-		try{
+		byte[] lEncPwd = null;
+		Random random = new Random();
+		Calendar calendar = Calendar.getInstance();
+
+		try {
 			lSalt = PasswordEncryptionService.generateSalt();
 			lEncPwd = PasswordEncryptionService.getEncryptedPassword(pwd, lSalt);
-		} catch(Exception e){
+		} catch (Exception e) {
 			System.out.println(e.getStackTrace());
 		}
-		
+
 		AppUser user = new AppUser();
-        user.setUserId(1000);
+		user.setUserId(1000);
 		user.setFirstName("Todd");
 		user.setLastName("Johnston");
 		user.setEmail("foo@foobar.com");
 		user.setSalt(lSalt);
 		user.setPassword(lEncPwd);
-		user.setCreateDate(new Date());
-		user.setModDate(new Date());
-		
+		user.setCreateDTM(new Timestamp(calendar.getTimeInMillis()));
+		user.setModifiedDTM(user.getCreateDTM());
+
 		pwdUserModel.setAppUser(user);
-		
-	    Category category = new Category();
-	    category.setCatId(100);
-	    category.setChildId(100);
-	    category.setParentId(100);
-	    category.setDescription("Description");
-	    category.setUserId(1000);
-	    category.setName("root");
-		
- 		
+
+		// Setup root category, all id's are set to ROOT_ID
+		Category category = new Category();
+		category.setCatId(Category.ROOT_ID);
+		category.setChildId(Category.ROOT_ID); // ROOT is it's own child by
+												// design
+		category.setParentId(Category.ROOT_ID);
+		category.setDescription(Category.ROOT_NAME);
+		category.setUserId(pwdUserModel.getAppUser().getUserId());
+		category.setName(Category.ROOT_NAME);
+		category.setCreateDTM(new Timestamp(calendar.getTimeInMillis()));
+		category.setModifiedDTM(category.getCreateDTM());
+
+		try {
+			pwdUserModel.addCategory(category);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		// For now, setup 1evel deep
+
+		for (int i = 0; i < NUM_CATEGORY_MAX; i++) {
+
+			int id = 101 + i;
+			Category cat = new Category();
+			cat.setCatId(id);
+			cat.setChildId(id);
+			cat.setParentId(Category.ROOT_ID);
+			cat.setDescription(id + "- Description");
+			cat.setUserId(pwdUserModel.getAppUser().getUserId());
+			cat.setName("Category - " + id);
+			cat.setCreateDTM(new Timestamp(calendar.getTimeInMillis()));
+			cat.setModifiedDTM(category.getCreateDTM());
+
+			try {
+				pwdUserModel.addCategory(cat);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
 		for (int i = 0; i < NUM_SITES_MAX_PER_CATEGORY; i++) {
 			Site site = new Site();
 			site.setSiteId(idCounter.incrementAndGet());
 			site.setAppUserId(user.getUserId());
-		    site.setCatId(category.getCatId());
+			site.setCatId(random.nextInt(NUM_CATEGORY_MAX));
 			site.setSiteName("My_Site_Name_" + site.getSiteId());
 			site.setSiteURL("http://foobar.com/foobar");
 			site.setNotes("My_Site_Notes_" + site.getSiteId());
 			site.setSiteLogin("Login_Name_" + site.getSiteId());
-			site.setModDate(new Date());
+			site.setCreateDTM(new Timestamp(calendar.getTimeInMillis()));
+			site.setModifiedDTM(site.getCreateDTM());
 
 			try {
 				byte[] salt = user.getSalt();
 				String str = "Password_" + site.getSiteId();
-				site.setPassword(PasswordEncryptionService
-						.getEncryptedPassword(str, salt));
+				site.setPassword(PasswordEncryptionService.getEncryptedPassword(str, salt));
 			} catch (NoSuchAlgorithmException nsa) {
 				nsa.printStackTrace();
 			} catch (InvalidKeySpecException ikse) {
 				ikse.printStackTrace();
 			}
-			
-			siteList.add(site);
+
+			try {
+				pwdUserModel.addSite(site);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
 		}
-		pwdUserModel.setSiteList(siteList);
-		
 	}
-	
+
+	// Static Dump
 	@GET
-	@Produces({"application/json"})
-	public PasswordUserModel getPwdUserModel()
-	{
-		return pwdUserModel;
-		
+	@Produces({ "application/json" })
+	public PasswordUserModel getPwdUserModel() {
+		PasswordUserModel pwdModel = pwdUserModel;
+		return pwdModel;
+
 	}
-	
-	
+
+	@GET
+	@Path("/xml")
+	@Produces({ "application/xml" })
+	public PasswordUserModel getPwdUserModel2XML() {
+		PasswordUserModel pwdModel = pwdUserModel;
+		return pwdModel;
+
+	}
+
 }

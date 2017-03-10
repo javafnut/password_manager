@@ -1,7 +1,7 @@
 package com.ibexsys.pwd.model;
 
+import java.sql.Timestamp;
 import java.util.Arrays;
-import java.util.Date;
 
 public class AppUser {
 
@@ -11,8 +11,8 @@ public class AppUser {
 	private String email;
 	private byte[] salt;
 	private byte[] password;
-	private Date createDate;
-	private Date modDate;
+	private Timestamp createDTM;
+	private Timestamp modifiedDTM;
 
 	public long getUserId() {
 		return userId;
@@ -62,31 +62,31 @@ public class AppUser {
 		this.password = password;
 	}
 
-	public Date getCreateDate() {
-		return createDate;
+	public Timestamp getCreateDTM() {
+		return createDTM;
 	}
 
-	public void setCreateDate(Date createDate) {
-		this.createDate = createDate;
+	public void setCreateDTM(Timestamp created) {
+		this.createDTM = created;
 	}
 
-	public Date getModDate() {
-		return modDate;
+	public Timestamp getModifiedDTM() {
+		return modifiedDTM;
 	}
 
-	public void setModDate(Date modDate) {
-		this.modDate = modDate;
+	public void setModifiedDTM(Timestamp modDTM) {
+		this.modifiedDTM = modDTM;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((createDate == null) ? 0 : createDate.hashCode());
+		result = prime * result + ((createDTM == null) ? 0 : createDTM.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
-		result = prime * result + ((modDate == null) ? 0 : modDate.hashCode());
+		result = prime * result + ((modifiedDTM == null) ? 0 : modifiedDTM.hashCode());
 		result = prime * result + Arrays.hashCode(password);
 		result = prime * result + Arrays.hashCode(salt);
 		result = prime * result + (int) (userId ^ (userId >>> 32));
@@ -102,10 +102,10 @@ public class AppUser {
 		if (getClass() != obj.getClass())
 			return false;
 		AppUser other = (AppUser) obj;
-		if (createDate == null) {
-			if (other.createDate != null)
+		if (createDTM == null) {
+			if (other.createDTM != null)
 				return false;
-		} else if (!createDate.equals(other.createDate))
+		} else if (!createDTM.equals(other.createDTM))
 			return false;
 		if (email == null) {
 			if (other.email != null)
@@ -122,10 +122,10 @@ public class AppUser {
 				return false;
 		} else if (!lastName.equals(other.lastName))
 			return false;
-		if (modDate == null) {
-			if (other.modDate != null)
+		if (modifiedDTM == null) {
+			if (other.modifiedDTM != null)
 				return false;
-		} else if (!modDate.equals(other.modDate))
+		} else if (!modifiedDTM.equals(other.modifiedDTM))
 			return false;
 		if (!Arrays.equals(password, other.password))
 			return false;
@@ -135,4 +135,12 @@ public class AppUser {
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "AppUser [userId=" + userId + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
+				+ ", salt=" + Arrays.toString(salt) + ", password=" + Arrays.toString(password) + ", createDTM="
+				+ createDTM + ", modifiedDTM=" + modifiedDTM + "]";
+	}
+
 }

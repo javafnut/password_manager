@@ -33,6 +33,7 @@ public class CustomerResource {
 	private static AtomicInteger idCounter = new AtomicInteger();
 
 	static {
+		
 		System.out.println("CustomerResource created");
 		Customer customer = new Customer();
 		customer.setId(idCounter.incrementAndGet());
