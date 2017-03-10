@@ -1,22 +1,9 @@
-/*
- /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.ibexsys.pwd.model;
-
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
-
-/**
- * 
- *
- * @author jsc
- */
-
 
 @XmlRootElement(name = "passwordFile")
 public class PasswordFileHandler  {

@@ -1,19 +1,12 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.ibexsys.pwd.model;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-/*
- *
- * @author jsc
- */
 
-@XmlRootElement(name = "password")
+@XmlRootElement(name = "Password-Criteria")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class PasswordCriteria{
 
@@ -30,57 +23,46 @@ public class PasswordCriteria{
 	private boolean alphaLowerChars = true;
 	private boolean numericChars = true;
 	private boolean isOtherChars = true;
-	/**
-	 * @return the pwdLen
-	 */
+
+	@XmlElement(name = "pwd-length")
 	public int getPwdLen() {
 		return pwdLen;
 	}
-	/**
-	 * @param pwdLen the pwdLen to set
-	 */
+
+
 	public void setPwdLen(int pwdLen) {
 		this.pwdLen = pwdLen;
 	}
-	/**
-	 * @return the alphaUpperChars
-	 */
+
+	@XmlElement
 	public boolean isAlphaUpperChars() {
 		return alphaUpperChars;
 	}
-	/**
-	 * @param alphaUpperChars the alphaUpperChars to set
-	 */
+
+
 	public void setAlphaUpperChars(boolean alphaUpperChars) {
 		this.alphaUpperChars = alphaUpperChars;
 	}
-	/**
-	 * @return the alphaLowerChars
-	 */
+
+	@XmlElement
 	public boolean isAlphaLowerChars() {
 		return alphaLowerChars;
 	}
-	/**
-	 * @param alphaLowerChars the alphaLowerChars to set
-	 */
+
 	public void setAlphaLowerChars(boolean alphaLowerChars) {
 		this.alphaLowerChars = alphaLowerChars;
 	}
-	/**
-	 * @return the numericChars
-	 */
+	
+	@XmlElement
 	public boolean isNumericChars() {
 		return numericChars;
 	}
-	/**
-	 * @param numericChars the numericChars to set
-	 */
+
 	public void setNumericChars(boolean numericChars) {
 		this.numericChars = numericChars;
 	}
-	/**
-	 * @return the isOtherChars
-	 */
+	
+	@XmlElement
 	public boolean isOtherChars() {
 		return isOtherChars;
 	}

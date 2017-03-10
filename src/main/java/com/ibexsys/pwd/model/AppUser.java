@@ -1,7 +1,12 @@
 package com.ibexsys.pwd.model;
 import java.util.Arrays;
 import java.util.Date;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
+
+@XmlRootElement(name ="AppUser")
 public class AppUser {
 
 
@@ -15,6 +20,7 @@ public class AppUser {
 	private Date modDate;
 	
 
+	@XmlAttribute
 	public long getUserId() {
 		return userId;
 	}
@@ -23,6 +29,7 @@ public class AppUser {
 		this.userId = userId;
 	}
 
+	@XmlElement(name = "first-name")
 	public String getFirstName() {
 		return firstName;
 	}
@@ -31,6 +38,7 @@ public class AppUser {
 		this.firstName = firstName;
 	}
 
+	@XmlElement(name = "last-name")
 	public String getLastName() {
 		return lastName;
 	}
@@ -39,6 +47,7 @@ public class AppUser {
 		this.lastName = lastName;
 	}
 
+	@XmlElement(name = "email")
 	public String getEmail() {
 		return email;
 	}
@@ -55,6 +64,7 @@ public class AppUser {
 		this.salt = salt;
 	}
 
+	@XmlElement(name = "password")
 	public byte[] getPassword() {
 		return password;
 	}
@@ -62,7 +72,8 @@ public class AppUser {
 	public void setPassword(byte[] password) {
 		this.password = password;
 	}
-
+	
+	@XmlElement(name = "created")
 	public Date getCreateDate() {
 		return createDate;
 	}
@@ -71,6 +82,7 @@ public class AppUser {
 		this.createDate = createDate;
 	}
 
+	@XmlElement(name = "modified")
 	public Date getModDate() {
 		return modDate;
 	}

@@ -1,26 +1,15 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.ibexsys.pwd.model;
 
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 import java.util.Arrays;
 import java.util.Date;
 
-/**
- *
- * @author jsc
- */
-
-
-@XmlRootElement(name = "site")
-// If you want you can define the order in which the fields are written
-// Optional
-@XmlType(propOrder = { "siteName", "catId","appUserId","siteURL", "siteLogin",
+@XmlRootElement(name = "Site")
+@XmlType(propOrder = { "siteName", "catId","siteURL", "siteLogin",
                        "password", "notes", "createDate", "modDate"})
 public class Site { 
     
@@ -42,109 +31,78 @@ public class Site {
     private Date modDate;
     
 
-    @XmlAttribute
+    @XmlAttribute(name = "SiteID")
     public long getSiteId() {
         return siteId;
     }
 
-	/**
-	 * @param siteId the siteId to set
-	 */
+
 	public void setSiteId(long siteId) {
 		this.siteId = siteId;
 	}
 
-	/**
-	 * @return the siteName
-	 */
+
+	@XmlElement(name = "site-name")
 	public String getSiteName() {
 		return siteName;
 	}
 
 
-	/**
-	 * @param siteName the siteName to set
-	 */
 	public void setSiteName(String siteName) {
 		this.siteName = siteName;
 	}
 
 
-	/**
-	 * @return the catId
-	 */
+	@XmlElement(name = "site-catID")
 	public long getCatId() {
 		return catId;
 	}
 
 
-	/**
-	 * @param catId the catId to set
-	 */
 	public void setCatId(long catId) {
 		this.catId = catId;
 	}
 
 
-	/**
-	 * @return the appUserId
-	 */
+
 	public long getAppUserId() {
 		return appUserId;
 	}
 
 
-	/**
-	 * @param appUserId the appUserId to set
-	 */
 	public void setAppUserId(long appUserId) {
 		this.appUserId = appUserId;
 	}
 
 
-	/**
-	 * @return the siteURL
-	 */
+	@XmlElement(name = "site-URL")
 	public String getSiteURL() {
 		return siteURL;
 	}
 
 
-	/**
-	 * @param siteURL the siteURL to set
-	 */
 	public void setSiteURL(String siteURL) {
 		this.siteURL = siteURL;
 	}
 
 
-	/**
-	 * @return the siteLogin
-	 */
+	@XmlElement(name = "site-login")
 	public String getSiteLogin() {
 		return siteLogin;
 	}
 
 
-	/**
-	 * @param siteLogin the siteLogin to set
-	 */
 	public void setSiteLogin(String siteLogin) {
 		this.siteLogin = siteLogin;
 	}
 
 
-	/**
-	 * @return the password
-	 */
+	@XmlElement(name = "site-password")
 	public byte[] getPassword() {
 		return password;
 	}
 
 
-	/**
-	 * @param password the password to set
-	 */
 	public void setPassword(byte[] password) {
 		this.password = password;
 	}
@@ -158,33 +116,24 @@ public class Site {
 	}
 
 
-	/**
-	 * @param notes the notes to set
-	 */
+	@XmlElement(name = "site-notes")
 	public void setNotes(String notes) {
 		this.notes = notes;
 	}
 
 
-	/**
-	 * @return the createDate
-	 */
+	@XmlElement(name = "created")
 	public Date getCreateDate() {
 		return createDate;
 	}
 
 
-	/**
-	 * @param date the createDate to set
-	 */
 	public void setCreateDate(Date date) {
 		this.createDate = date;
 	}
 
 
-	/**
-	 * @return the modDate
-	 */
+	@XmlElement(name = "modified")
 	public Date getModDate() {
 		return modDate;
 	}
@@ -270,10 +219,5 @@ public class Site {
 				+ ", siteURL=" + siteURL + ", siteLogin=" + siteLogin + ", password=" + Arrays.toString(password)
 				+ ", notes=" + notes + ", createDate=" + createDate + ", modDate=" + modDate + "]";
 	}
-
-
-
-
-
 
 }
