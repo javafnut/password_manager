@@ -9,104 +9,84 @@ import java.util.Arrays;
 import java.util.Date;
 
 @XmlRootElement(name = "Site")
-@XmlType(propOrder = { "siteName", "catId","siteURL", "siteLogin",
-                       "password", "notes", "createDate", "modDate"})
-public class Site { 
-    
-    private long siteId;
-    private String siteName;
-    private long catId;
-    private long appUserId;
+@XmlType(propOrder = { "siteName", "catId", "siteURL", "siteLogin", "password", "notes", "createDate", "modDate" })
+public class Site {
 
-    private String siteURL;
-    private String siteLogin;
-    private byte[] password;
-    private String notes;
-    //private String pwdText;
+	private long siteId;
+	private String siteName;
+	private long catId;
+	private long appUserId;
 
+	private String siteURL;
+	private String siteLogin;
+	private byte[] password;
+	private String notes;
 
-    
-    // Change To Date
-    private Date createDate;
-    private Date modDate;
-    
+	// Change To Date
+	private Date createDate;
+	private Date modDate;
 
-    @XmlAttribute(name = "SiteID")
-    public long getSiteId() {
-        return siteId;
-    }
-
+	@XmlAttribute(name = "SiteID")
+	public long getSiteId() {
+		return siteId;
+	}
 
 	public void setSiteId(long siteId) {
 		this.siteId = siteId;
 	}
-
 
 	@XmlElement(name = "site-name")
 	public String getSiteName() {
 		return siteName;
 	}
 
-
 	public void setSiteName(String siteName) {
 		this.siteName = siteName;
 	}
-
 
 	@XmlElement(name = "site-catID")
 	public long getCatId() {
 		return catId;
 	}
 
-
 	public void setCatId(long catId) {
 		this.catId = catId;
 	}
-
-
 
 	public long getAppUserId() {
 		return appUserId;
 	}
 
-
 	public void setAppUserId(long appUserId) {
 		this.appUserId = appUserId;
 	}
-
 
 	@XmlElement(name = "site-URL")
 	public String getSiteURL() {
 		return siteURL;
 	}
 
-
 	public void setSiteURL(String siteURL) {
 		this.siteURL = siteURL;
 	}
-
 
 	@XmlElement(name = "site-login")
 	public String getSiteLogin() {
 		return siteLogin;
 	}
 
-
 	public void setSiteLogin(String siteLogin) {
 		this.siteLogin = siteLogin;
 	}
-
 
 	@XmlElement(name = "site-password")
 	public byte[] getPassword() {
 		return password;
 	}
 
-
 	public void setPassword(byte[] password) {
 		this.password = password;
 	}
-
 
 	/**
 	 * @return the notes
@@ -115,32 +95,28 @@ public class Site {
 		return notes;
 	}
 
-
 	@XmlElement(name = "site-notes")
 	public void setNotes(String notes) {
 		this.notes = notes;
 	}
-
 
 	@XmlElement(name = "created")
 	public Date getCreateDate() {
 		return createDate;
 	}
 
-
 	public void setCreateDate(Date date) {
 		this.createDate = date;
 	}
-
 
 	@XmlElement(name = "modified")
 	public Date getModDate() {
 		return modDate;
 	}
 
-
 	/**
-	 * @param modDate the modDate to set
+	 * @param modDate
+	 *            the modDate to set
 	 */
 	public void setModDate(Date modDate) {
 		this.modDate = modDate;

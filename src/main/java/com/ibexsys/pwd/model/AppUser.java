@@ -6,7 +6,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 
-@XmlRootElement(name ="AppUser")
+@XmlRootElement(name = "AppUser")
 public class AppUser {
 
 

@@ -1,22 +1,23 @@
 package com.ibexsys.pwd.model;
+
 import java.util.Date;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement(name ="Category")
+@XmlRootElement(name = "Category")
 public class Category {
-    private long catId;
-    private long userId;
-    private long parentId;
-    private long childId;
-    private String name;
-    private String description;
-    private Date createDate;
-    private Date modDate;
+	private long catId;
+	private long userId;
+	private long parentId;
+	private long childId;
+	private String name;
+	private String description;
+	private Date createDate;
+	private Date modDate;
 
-    @XmlAttribute
+	@XmlAttribute
 	public long getCatId() {
 		return catId;
 	}
