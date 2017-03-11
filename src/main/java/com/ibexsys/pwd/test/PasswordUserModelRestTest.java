@@ -61,7 +61,7 @@ public class PasswordUserModelRestTest {
 		}
 
 		AppUser user = new AppUser();
-		user.setUserId(1000);
+		user.setUserID(1000);
 		user.setFirstName("Todd");
 		user.setLastName("Johnston");
 		user.setEmail("foo@foobar.com");
@@ -74,12 +74,12 @@ public class PasswordUserModelRestTest {
 
 		// Setup root category, all id's are set to ROOT_ID
 		Category category = new Category();
-		category.setCatId(Category.ROOT_ID);
-		category.setChildId(Category.ROOT_ID); // ROOT is it's own child by
+		category.setCatID(Category.ROOT_ID);
+		category.setChildID(Category.ROOT_ID); // ROOT is it's own child by
 												// design
-		category.setParentId(Category.ROOT_ID);
+		category.setParentID(Category.ROOT_ID);
 		category.setDescription(Category.ROOT_NAME);
-		category.setUserId(pwdUserModel.getAppUser().getUserId());
+		category.setUserID(pwdUserModel.getAppUser().getUserID());
 		category.setName(Category.ROOT_NAME);
 		category.setCreateDTM(new Timestamp(calendar.getTimeInMillis()));
 		category.setModifiedDTM(category.getCreateDTM());
@@ -97,11 +97,11 @@ public class PasswordUserModelRestTest {
 
 			int id = 101 + i;
 			Category cat = new Category();
-			cat.setCatId(id);
-			cat.setChildId(id);
-			cat.setParentId(Category.ROOT_ID);
+			cat.setCatID(id);
+			cat.setChildID(id);
+			cat.setParentID(Category.ROOT_ID);
 			cat.setDescription(id + "- Description");
-			cat.setUserId(pwdUserModel.getAppUser().getUserId());
+			cat.setUserID(pwdUserModel.getAppUser().getUserID());
 			cat.setName("Category - " + id);
 			cat.setCreateDTM(new Timestamp(calendar.getTimeInMillis()));
 			cat.setModifiedDTM(category.getCreateDTM());
@@ -116,19 +116,19 @@ public class PasswordUserModelRestTest {
 
 		for (int i = 0; i < NUM_SITES_MAX_PER_CATEGORY; i++) {
 			Site site = new Site();
-			site.setSiteId(idCounter.incrementAndGet());
-			site.setAppUserId(user.getUserId());
-			site.setCatId(random.nextInt(NUM_CATEGORY_MAX));
-			site.setSiteName("My_Site_Name_" + site.getSiteId());
+			site.setSiteID(idCounter.incrementAndGet());
+			site.setAppUserID(user.getUserID());
+			site.setCatID(random.nextInt(NUM_CATEGORY_MAX));
+			site.setSiteName("My_Site_Name_" + site.getSiteID());
 			site.setSiteURL("http://foobar.com/foobar");
-			site.setNotes("My_Site_Notes_" + site.getSiteId());
-			site.setSiteLogin("Login_Name_" + site.getSiteId());
+			site.setNotes("My_Site_Notes_" + site.getSiteID());
+			site.setSiteLogin("Login_Name_" + site.getSiteID());
 			site.setCreateDTM(new Timestamp(calendar.getTimeInMillis()));
 			site.setModifiedDTM(site.getCreateDTM());
 
 			try {
 				byte[] salt = user.getSalt();
-				String str = "Password_" + site.getSiteId();
+				String str = "Password_" + site.getSiteID();
 				site.setPassword(PasswordEncryptionService.getEncryptedPassword(str, salt));
 			} catch (NoSuchAlgorithmException nsa) {
 				nsa.printStackTrace();

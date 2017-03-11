@@ -7,21 +7,21 @@ public class Category {
 	public static final int ROOT_ID = 100;
 	public static final String ROOT_NAME = "ROOT";
 
-	private long catId;
-	private long userId;
-	private long parentId;
-	private long childId;
+	private long catID;
+	private long userID;
+	private long parentID;
+	private long childID;
 	private String name;
 	private String description;
 	private Timestamp createDTM;
 	private Timestamp modifiedDTM;
 
-	public long getCatId() {
-		return catId;
+	public long getCatID() {
+		return catID;
 	}
 
-	public void setCatId(long catId) {
-		this.catId = catId;
+	public void setCatID(long catID) {
+		this.catID = catID;
 	}
 
 	public String getName() {
@@ -40,28 +40,28 @@ public class Category {
 		this.description = description;
 	}
 
-	public long getParentId() {
-		return parentId;
+	public long getParentID() {
+		return parentID;
 	}
 
-	public void setParentId(long parentId) {
-		this.parentId = parentId;
+	public void setParentID(long parentID) {
+		this.parentID = parentID;
 	}
 
-	public long getChildId() {
-		return childId;
+	public long getChildID() {
+		return childID;
 	}
 
-	public void setChildId(long childId) {
-		this.childId = childId;
+	public void setChildID(long childID) {
+		this.childID = childID;
 	}
 
-	public long getUserId() {
-		return userId;
+	public long getUserID() {
+		return userID;
 	}
 
-	public void setUserId(long userId) {
-		this.userId = userId;
+	public void setUserID(long userID) {
+		this.userID = userID;
 	}
 
 	public Timestamp getCreateDTM() {

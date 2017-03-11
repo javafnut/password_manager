@@ -5,7 +5,7 @@ import java.util.Arrays;
 
 public class AppUser {
 
-	private long userId;
+	private long userID;
 	private String firstName;
 	private String lastName;
 	private String email;
@@ -14,12 +14,12 @@ public class AppUser {
 	private Timestamp createDTM;
 	private Timestamp modifiedDTM;
 
-	public long getUserId() {
-		return userId;
+	public long getUserID() {
+		return userID;
 	}
 
-	public void setUserId(long userId) {
-		this.userId = userId;
+	public void setUserID(long userID) {
+		this.userID = userID;
 	}
 
 	public String getFirstName() {
@@ -89,7 +89,7 @@ public class AppUser {
 		result = prime * result + ((modifiedDTM == null) ? 0 : modifiedDTM.hashCode());
 		result = prime * result + Arrays.hashCode(password);
 		result = prime * result + Arrays.hashCode(salt);
-		result = prime * result + (int) (userId ^ (userId >>> 32));
+		result = prime * result + (int) (userID ^ (userID >>> 32));
 		return result;
 	}
 
@@ -131,14 +131,14 @@ public class AppUser {
 			return false;
 		if (!Arrays.equals(salt, other.salt))
 			return false;
-		if (userId != other.userId)
+		if (userID != other.userID)
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "AppUser [userId=" + userId + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
+		return "AppUser [userID=" + userID + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
 				+ ", salt=" + Arrays.toString(salt) + ", password=" + Arrays.toString(password) + ", createDTM="
 				+ createDTM + ", modifiedDTM=" + modifiedDTM + "]";
 	}

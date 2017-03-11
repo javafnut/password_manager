@@ -7,13 +7,13 @@ import javax.xml.bind.annotation.XmlType;
 import java.util.Arrays;
 import java.sql.Timestamp;
 
-@XmlType(propOrder = { "siteName", "catId", "siteURL", "siteLogin", "password", "notes", "createDate", "modDate" })
+@XmlType(propOrder = { "siteName", "catID", "siteURL", "siteLogin", "password", "notes", "createDate", "modDate" })
 public class Site {
 
-	private long siteId;
+	private long siteID;
 	private String siteName;
-	private long catId;
-	private long appUserId;
+	private long catID;
+	private long appUserID;
 
 	private String siteURL;
 	private String siteLogin;
@@ -24,12 +24,12 @@ public class Site {
 	private Timestamp modifiedDTM;
 
 	@XmlAttribute(name = "SiteID")
-	public long getSiteId() {
-		return siteId;
+	public long getSiteID() {
+		return siteID;
 	}
 
-	public void setSiteId(long siteId) {
-		this.siteId = siteId;
+	public void setSiteID(long siteID) {
+		this.siteID = siteID;
 	}
 
 	@XmlElement(name = "name")
@@ -42,20 +42,20 @@ public class Site {
 	}
 
 	@XmlElement(name = "catID")
-	public long getCatId() {
-		return catId;
+	public long getCatID() {
+		return catID;
 	}
 
-	public void setCatId(long catId) {
-		this.catId = catId;
+	public void setCatID(long catID) {
+		this.catID = catID;
 	}
 
-	public long getAppUserId() {
-		return appUserId;
+	public long getAppUserID() {
+		return appUserID;
 	}
 
-	public void setAppUserId(long appUserId) {
-		this.appUserId = appUserId;
+	public void setAppUserID(long appUserID) {
+		this.appUserID = appUserID;
 	}
 
 	@XmlElement(name = "URL")
@@ -119,13 +119,13 @@ public class Site {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + (int) (appUserId ^ (appUserId >>> 32));
-		result = prime * result + (int) (catId ^ (catId >>> 32));
+		result = prime * result + (int) (appUserID ^ (appUserID >>> 32));
+		result = prime * result + (int) (catID ^ (catID >>> 32));
 		result = prime * result + ((createDTM == null) ? 0 : createDTM.hashCode());
 		result = prime * result + ((modifiedDTM == null) ? 0 : modifiedDTM.hashCode());
 		result = prime * result + ((notes == null) ? 0 : notes.hashCode());
 		result = prime * result + Arrays.hashCode(password);
-		result = prime * result + (int) (siteId ^ (siteId >>> 32));
+		result = prime * result + (int) (siteID ^ (siteID >>> 32));
 		result = prime * result + ((siteLogin == null) ? 0 : siteLogin.hashCode());
 		result = prime * result + ((siteName == null) ? 0 : siteName.hashCode());
 		result = prime * result + ((siteURL == null) ? 0 : siteURL.hashCode());
@@ -141,9 +141,9 @@ public class Site {
 		if (getClass() != obj.getClass())
 			return false;
 		Site other = (Site) obj;
-		if (appUserId != other.appUserId)
+		if (appUserID != other.appUserID)
 			return false;
-		if (catId != other.catId)
+		if (catID != other.catID)
 			return false;
 		if (createDTM == null) {
 			if (other.createDTM != null)
@@ -162,7 +162,7 @@ public class Site {
 			return false;
 		if (!Arrays.equals(password, other.password))
 			return false;
-		if (siteId != other.siteId)
+		if (siteID != other.siteID)
 			return false;
 		if (siteLogin == null) {
 			if (other.siteLogin != null)
@@ -184,7 +184,7 @@ public class Site {
 
 	@Override
 	public String toString() {
-		return "Site [siteId=" + siteId + ", siteName=" + siteName + ", catId=" + catId + ", appUserId=" + appUserId
+		return "Site [siteID=" + siteID + ", siteName=" + siteName + ", catID=" + catID + ", appUserID=" + appUserID
 				+ ", siteURL=" + siteURL + ", siteLogin=" + siteLogin + ", password=" + Arrays.toString(password)
 				+ ", notes=" + notes + ", createDTM=" + createDTM + ", modifiedDTM=" + modifiedDTM + "]";
 	}
