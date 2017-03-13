@@ -5,21 +5,21 @@ import java.util.Arrays;
 
 public class AppUser {
 
-	private long userID;
+	private int userId;
 	private String firstName;
 	private String lastName;
 	private String email;
 	private byte[] salt;
 	private byte[] password;
-	private Timestamp createDTM;
+	private Timestamp createdDTM;
 	private Timestamp modifiedDTM;
 
-	public long getUserID() {
-		return userID;
+	public int getUserId() {
+		return userId;
 	}
 
-	public void setUserID(long userID) {
-		this.userID = userID;
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 
 	public String getFirstName() {
@@ -62,12 +62,12 @@ public class AppUser {
 		this.password = password;
 	}
 
-	public Timestamp getCreateDTM() {
-		return createDTM;
+	public Timestamp getCreatedDTM() {
+		return createdDTM;
 	}
 
-	public void setCreateDTM(Timestamp created) {
-		this.createDTM = created;
+	public void setCreatedDTM(Timestamp created) {
+		this.createdDTM = created;
 	}
 
 	public Timestamp getModifiedDTM() {
@@ -82,14 +82,14 @@ public class AppUser {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((createDTM == null) ? 0 : createDTM.hashCode());
+		result = prime * result + ((createdDTM == null) ? 0 : createdDTM.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
 		result = prime * result + ((modifiedDTM == null) ? 0 : modifiedDTM.hashCode());
 		result = prime * result + Arrays.hashCode(password);
 		result = prime * result + Arrays.hashCode(salt);
-		result = prime * result + (int) (userID ^ (userID >>> 32));
+		result = prime * result + (int) (userId ^ (userId >>> 32));
 		return result;
 	}
 
@@ -102,10 +102,10 @@ public class AppUser {
 		if (getClass() != obj.getClass())
 			return false;
 		AppUser other = (AppUser) obj;
-		if (createDTM == null) {
-			if (other.createDTM != null)
+		if (createdDTM == null) {
+			if (other.createdDTM != null)
 				return false;
-		} else if (!createDTM.equals(other.createDTM))
+		} else if (!createdDTM.equals(other.createdDTM))
 			return false;
 		if (email == null) {
 			if (other.email != null)
@@ -131,16 +131,16 @@ public class AppUser {
 			return false;
 		if (!Arrays.equals(salt, other.salt))
 			return false;
-		if (userID != other.userID)
+		if (userId != other.userId)
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "AppUser [userID=" + userID + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
+		return "AppUser [userID=" + userId + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
 				+ ", salt=" + Arrays.toString(salt) + ", password=" + Arrays.toString(password) + ", createDTM="
-				+ createDTM + ", modifiedDTM=" + modifiedDTM + "]";
+				+ createdDTM + ", modifiedDTM=" + modifiedDTM + "]";
 	}
 
 }

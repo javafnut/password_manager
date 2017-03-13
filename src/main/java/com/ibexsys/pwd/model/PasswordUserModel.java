@@ -16,8 +16,8 @@ public class PasswordUserModel {
 	@XmlElement(name = "Site")
 
 	private List<Site> siteList;
-	private Map<Long,Site> siteMap;
-	private Map<Long, Category> categoryMap;
+	private Map<String,Site> siteMap;
+	private Map<String, Category> categoryMap;
 	private String pwdFileName;
 	private AppUser appUser;
 
@@ -43,11 +43,11 @@ public class PasswordUserModel {
 //		}
 //	}
 //	
-	public Map<Long,Site> getSitesMap() {
+	public Map<String,Site> getSitesMap() {
 		return siteMap;
 	}
 
-	public void setSiteMap(Map<Long,Site> siteMap) {
+	public void setSiteMap(Map<String,Site> siteMap) {
 		this.siteMap = siteMap;
 	}
 
@@ -58,10 +58,10 @@ public class PasswordUserModel {
 			throw new Exception("Either Site or AppUser is Null");
 
 		if (siteMap != null) {
-			siteMap.put(site.getSiteID(),site);
+			siteMap.put(String.valueOf(site.getSiteId()),site);
 		} else {
-			siteMap = new ConcurrentHashMap<Long,Site>();
-			siteMap.put(site.getSiteID(),site);
+			siteMap = new ConcurrentHashMap<String,Site>();
+			siteMap.put(String.valueOf(site.getSiteId()),site);
 		}
 	}
 	
@@ -74,18 +74,18 @@ public class PasswordUserModel {
 
 		
 		if (categoryMap != null) {
-			categoryMap.put(category.getCatID() , category);
+			categoryMap.put(String.valueOf(category.getCatID()) , category);
 		} else {
-			categoryMap = new ConcurrentHashMap<Long,Category>();
-			categoryMap.put(category.getCatID(),category);
+			categoryMap = new ConcurrentHashMap<String,Category>();
+			categoryMap.put(String.valueOf(category.getCatID()),category);
 		}
 	}
 
-	public Map<Long,Category> getCategoryMap() {
+	public Map<String,Category> getCategoryMap() {
 		return categoryMap;
 	}
 
-	public void setCategoryMap(Map<Long,Category> categoryMap) {
+	public void setCategoryMap(Map<String,Category> categoryMap) {
 		this.categoryMap = categoryMap;
 	}
 

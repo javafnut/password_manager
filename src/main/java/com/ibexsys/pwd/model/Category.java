@@ -1,26 +1,45 @@
 package com.ibexsys.pwd.model;
 
 import java.sql.Timestamp;
+import java.io.Serializable;
 
-public class Category {
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Column;
+import javax.persistence.GenerationType;
 
+@Entity
+@Table(name="Category")
+public class Category implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -9036879502053475149L;
 	public static final int ROOT_ID = 100;
 	public static final String ROOT_NAME = "ROOT";
-
-	private long catID;
-	private long userID;
-	private long parentID;
-	private long childID;
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="catID")
+	private int catID;
+    
+	@Column()
+	private int userID;
+	private int parentID;
+	private int childID;
 	private String name;
 	private String description;
-	private Timestamp createDTM;
+	private Timestamp createdDTM;
 	private Timestamp modifiedDTM;
 
-	public long getCatID() {
+	public int getCatID() {
 		return catID;
 	}
 
-	public void setCatID(long catID) {
+	public void setCatID(int catID) {
 		this.catID = catID;
 	}
 
@@ -40,19 +59,19 @@ public class Category {
 		this.description = description;
 	}
 
-	public long getParentID() {
+	public int getParentID() {
 		return parentID;
 	}
 
-	public void setParentID(long parentID) {
+	public void setParentID(int parentID) {
 		this.parentID = parentID;
 	}
 
-	public long getChildID() {
+	public int getChildID() {
 		return childID;
 	}
 
-	public void setChildID(long childID) {
+	public void setChildID(int childID) {
 		this.childID = childID;
 	}
 
@@ -60,16 +79,16 @@ public class Category {
 		return userID;
 	}
 
-	public void setUserID(long userID) {
+	public void setUserID(int userID) {
 		this.userID = userID;
 	}
 
-	public Timestamp getCreateDTM() {
-		return createDTM;
+	public Timestamp getCreatedDTM() {
+		return createdDTM;
 	}
 
-	public void setCreateDTM(Timestamp created) {
-		this.createDTM = created;
+	public void setCreatedDTM(Timestamp created) {
+		this.createdDTM = created;
 	}
 
 	public Timestamp getModifiedDTM() {
