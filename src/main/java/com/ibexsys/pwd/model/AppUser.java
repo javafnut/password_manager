@@ -3,15 +3,46 @@ package com.ibexsys.pwd.model;
 import java.sql.Timestamp;
 import java.util.Arrays;
 
-public class AppUser {
 
+import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Column;
+import javax.persistence.GenerationType;
+
+
+@Entity
+@Table(name = "AppUser")
+public class AppUser implements Serializable{
+
+	private static final long serialVersionUID = -6528351877018119894L;
+
+	@Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(name = "UserId")
 	private int userId;
+	
+	@Column(name = "FirstName")
 	private String firstName;
+	
+	@Column(name = "LastName")
 	private String lastName;
+	
+	@Column(name = "Email")
 	private String email;
+	
+	@Column(name = "UserSalt")
 	private byte[] salt;
+	
+	@Column(name = "Password")
 	private byte[] password;
+	
+	@Column(name = "CreatedDTM")
 	private Timestamp createdDTM;
+	
+	@Column(name = "ModifiedDTM")
 	private Timestamp modifiedDTM;
 
 	public int getUserId() {

@@ -123,7 +123,7 @@ public class PasswordUserModelRestTest {
 			site.setSiteName("My_Site_Name_" + site.getSiteId());
 			site.setSiteURL("http://foobar.com/foobar");
 			site.setNotes("My_Site_Notes_" + site.getSiteId());
-			site.setSiteLogin("Login_Name_" + site.getSiteId());
+			site.setLogin("Login_Name_" + site.getSiteId());
 			site.setCreateDTM(new Timestamp(calendar.getTimeInMillis()));
 			site.setModifiedDTM(site.getCreateDTM());
 

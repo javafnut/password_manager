@@ -1,5 +1,16 @@
 package com.ibexsys.pwd.model;
 
+
+import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Column;
+import javax.persistence.GenerationType;
+
+
+import javax.persistence.Column;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
@@ -7,20 +18,43 @@ import javax.xml.bind.annotation.XmlType;
 import java.util.Arrays;
 import java.sql.Timestamp;
 
-@XmlType(propOrder = {"SiteId", "siteName", "catId", "siteURL", "siteLogin", "password", "notes", "createdDTM", "modifiedDTM" })
-public class Site {
 
+
+@Entity
+@Table(name = "Site")
+@XmlType(propOrder = {"SiteId", "siteName", "catId", "siteURL", "siteLogin", "password", "notes", "createdDTM", "modifiedDTM" })
+public class Site implements Serializable {
+
+	private static final long serialVersionUID = 6874935206297050168L;
+
+	@Column(name = "SiteId")
 	private int siteId;
+	
+	@Column(name = "Name")
 	private String siteName;
+	
+	@Column(name = "CatId")
 	private int catId;
+	
+	@Column(name = "AppUserId")
 	private int appUserId;
 
+	@Column(name = "SiteURL")
 	private String siteURL;
-	private String siteLogin;
+	
+	@Column(name = "Login")
+	private String login;
+	
+	@Column(name = "Password")
 	private byte[] password;
+	
+	@Column(name = "Notes")
 	private String notes;
 
+	@Column(name = "CreatedDTM")
 	private Timestamp createDTM;
+	
+	@Column(name = "ModifiedDTM")
 	private Timestamp modifiedDTM;
 
 	@XmlAttribute(name = "SiteId")
@@ -68,12 +102,12 @@ public class Site {
 	}
 
 	@XmlElement(name = "login")
-	public String getSiteLogin() {
-		return siteLogin;
+	public String getLogin() {
+		return login;
 	}
 
-	public void setSiteLogin(String siteLogin) {
-		this.siteLogin = siteLogin;
+	public void setLogin(String login) {
+		this.login = login;
 	}
 
 	@XmlElement(name = "password")
@@ -126,7 +160,7 @@ public class Site {
 		result = prime * result + ((notes == null) ? 0 : notes.hashCode());
 		result = prime * result + Arrays.hashCode(password);
 		result = prime * result + (int) (siteId ^ (siteId >>> 32));
-		result = prime * result + ((siteLogin == null) ? 0 : siteLogin.hashCode());
+		result = prime * result + ((login == null) ? 0 : login.hashCode());
 		result = prime * result + ((siteName == null) ? 0 : siteName.hashCode());
 		result = prime * result + ((siteURL == null) ? 0 : siteURL.hashCode());
 		return result;
@@ -164,10 +198,10 @@ public class Site {
 			return false;
 		if (siteId != other.siteId)
 			return false;
-		if (siteLogin == null) {
-			if (other.siteLogin != null)
+		if (login == null) {
+			if (other.login != null)
 				return false;
-		} else if (!siteLogin.equals(other.siteLogin))
+		} else if (!login.equals(other.login))
 			return false;
 		if (siteName == null) {
 			if (other.siteName != null)
@@ -185,7 +219,7 @@ public class Site {
 	@Override
 	public String toString() {
 		return "Site [siteId=" + siteId + ", siteName=" + siteName + ", catId=" + catId + ", appUserId=" + appUserId
-				+ ", siteURL=" + siteURL + ", siteLogin=" + siteLogin + ", password=" + Arrays.toString(password)
+				+ ", siteURL=" + siteURL + ", siteLogin=" + login + ", password=" + Arrays.toString(password)
 				+ ", notes=" + notes + ", createDTM=" + createDTM + ", modifiedDTM=" + modifiedDTM + "]";
 	}
 
