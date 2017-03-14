@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+    "-//Hibernate/Hibernate Configuration DTD//EN"
+    "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/pwddb</property>
+		<property name="hibernate.connection.username">pwduser</property>
+		<property name="hibernate.connection.password">X569EFef11!!</property>
+		<property name = "hibernate.connection.]
+		<!-- JDBC connection pool (use the built-in) -->
+		<property name="connection.pool_size">1</property>
+		<!-- SQL dialect -->
+		<property name="dialect">org.hibernate.dialect.MySQLDialect</property>
+		<!-- Echo all executed SQL to stdout -->
+		<property name="show_sql">true</property>
+		<!-- Mapping files -->
+		<mapping class="com.ibexsys.pwd.model.AppUser" />
+		<mapping class="com.ibexsys.pwd.model.Category" />
+     	<mapping class="com.ibexsys.pwd.model.Site" />
+
+	</session-factory>
+</hibernate-configuration>

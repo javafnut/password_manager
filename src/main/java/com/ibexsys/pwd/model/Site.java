@@ -22,11 +22,12 @@ import java.sql.Timestamp;
 
 @Entity
 @Table(name = "Site")
-@XmlType(propOrder = {"SiteId", "siteName", "catId", "siteURL", "siteLogin", "password", "notes", "createdDTM", "modifiedDTM" })
 public class Site implements Serializable {
 
 	private static final long serialVersionUID = 6874935206297050168L;
 
+	@Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "SiteId")
 	private int siteId;
 	
