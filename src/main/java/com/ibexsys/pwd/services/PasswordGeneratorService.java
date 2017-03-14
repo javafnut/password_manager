@@ -1,6 +1,6 @@
 package com.ibexsys.pwd.services;
 
-import com.ibexsys.pwd.model.PasswordCriteria;
+import com.ibexsys.pwd.entities.PasswordCriteria;
 
 import java.util.Random;
 

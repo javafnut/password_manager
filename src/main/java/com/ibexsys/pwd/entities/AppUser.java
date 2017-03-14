@@ -1,4 +1,4 @@
-package com.ibexsys.pwd.model;
+package com.ibexsys.pwd.entities;
 
 import java.sql.Timestamp;
 import java.util.Arrays;

@@ -29,10 +29,10 @@ import javax.ws.rs.core.UriInfo;
 
 import org.springframework.stereotype.Component;
 
-import com.ibexsys.pwd.model.AppUser;
-import com.ibexsys.pwd.model.Category;
-import com.ibexsys.pwd.model.PasswordUserModel;
-import com.ibexsys.pwd.model.Site;
+import com.ibexsys.pwd.entities.AppUser;
+import com.ibexsys.pwd.entities.Category;
+import com.ibexsys.pwd.entities.PasswordUserModel;
+import com.ibexsys.pwd.entities.Site;
 
 import com.ibexsys.pwd.services.PasswordEncryptionService;
 

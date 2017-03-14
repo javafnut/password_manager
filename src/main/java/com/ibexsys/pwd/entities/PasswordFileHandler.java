@@ -1,4 +1,4 @@
-package com.ibexsys.pwd.model;
+package com.ibexsys.pwd.entities;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;

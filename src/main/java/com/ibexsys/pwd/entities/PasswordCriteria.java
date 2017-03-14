@@ -1,4 +1,4 @@
-package com.ibexsys.pwd.model;
+package com.ibexsys.pwd.entities;
 
 public class PasswordCriteria {
 
