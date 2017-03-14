@@ -9,7 +9,6 @@
 		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/pwddb</property>
 		<property name="hibernate.connection.username">pwduser</property>
 		<property name="hibernate.connection.password">X569EFef11!!</property>
-		<property name = "hibernate.connection.]
 		<!-- JDBC connection pool (use the built-in) -->
 		<property name="connection.pool_size">1</property>
 		<!-- SQL dialect -->
