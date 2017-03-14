@@ -11,9 +11,6 @@ import javax.persistence.GenerationType;
 
 
 import javax.persistence.Column;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
 
 import java.util.Arrays;
 import java.sql.Timestamp;
@@ -27,18 +24,18 @@ public class Site implements Serializable {
 	private static final long serialVersionUID = 6874935206297050168L;
 
 	@Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name = "SiteId")
-	private int siteId;
+	private Integer siteId;
 	
 	@Column(name = "Name")
 	private String siteName;
 	
 	@Column(name = "CatId")
-	private int catId;
+	private Integer catId;
 	
 	@Column(name = "AppUserId")
-	private int appUserId;
+	private Integer appUserId;
 
 	@Column(name = "SiteURL")
 	private String siteURL;
@@ -58,7 +55,6 @@ public class Site implements Serializable {
 	@Column(name = "ModifiedDTM")
 	private Timestamp modifiedDTM;
 
-	@XmlAttribute(name = "SiteId")
 	public int getSiteId() {
 		return siteId;
 	}
@@ -67,7 +63,7 @@ public class Site implements Serializable {
 		this.siteId = siteId;
 	}
 
-	@XmlElement(name = "name")
+	
 	public String getSiteName() {
 		return siteName;
 	}
@@ -76,24 +72,22 @@ public class Site implements Serializable {
 		this.siteName = siteName;
 	}
 
-	@XmlElement(name = "catID")
-	public int getCatId() {
+	public Integer getCatId() {
 		return catId;
 	}
 
-	public void setCatId(int catId) {
+	public void setCatId(Integer catId) {
 		this.catId = catId;
 	}
 
-	public int getAppUserId() {
+	public Integer getAppUserId() {
 		return appUserId;
 	}
 
-	public void setAppUserId(int appUserId) {
+	public void setAppUserId(Integer appUserId) {
 		this.appUserId = appUserId;
 	}
 
-	@XmlElement(name = "URL")
 	public String getSiteURL() {
 		return siteURL;
 	}
@@ -102,7 +96,6 @@ public class Site implements Serializable {
 		this.siteURL = siteURL;
 	}
 
-	@XmlElement(name = "login")
 	public String getLogin() {
 		return login;
 	}
@@ -111,7 +104,7 @@ public class Site implements Serializable {
 		this.login = login;
 	}
 
-	@XmlElement(name = "password")
+	
 	public byte[] getPassword() {
 		return password;
 	}
@@ -127,12 +120,10 @@ public class Site implements Serializable {
 		return notes;
 	}
 
-	@XmlElement(name = "notes")
 	public void setNotes(String notes) {
 		this.notes = notes;
 	}
 
-	@XmlElement(name = "created")
 	public Timestamp getCreateDTM() {
 		return createDTM;
 	}
@@ -141,7 +132,6 @@ public class Site implements Serializable {
 		this.createDTM = created;
 	}
 
-	@XmlElement(name = "modified")
 	public Timestamp getModifiedDTM() {
 		return modifiedDTM;
 	}

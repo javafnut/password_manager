@@ -22,24 +22,24 @@ public class Category implements Serializable {
 	public static final String ROOT_NAME = "ROOT";
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="catID")
-	private int catID;
+	private Integer catID;
     
 	@Column()
-	private int userID;
-	private int parentID;
-	private int childID;
+	private Integer userID;
+	private Integer parentID;
+	private Integer childID;
 	private String name;
 	private String description;
 	private Timestamp createdDTM;
 	private Timestamp modifiedDTM;
 
-	public int getCatID() {
+	public Integer getCatID() {
 		return catID;
 	}
 
-	public void setCatID(int catID) {
+	public void setCatID(Integer catID) {
 		this.catID = catID;
 	}
 
@@ -59,27 +59,27 @@ public class Category implements Serializable {
 		this.description = description;
 	}
 
-	public int getParentID() {
+	public Integer getParentID() {
 		return parentID;
 	}
 
-	public void setParentID(int parentID) {
+	public void setParentID(Integer parentID) {
 		this.parentID = parentID;
 	}
 
-	public int getChildID() {
+	public Integer getChildID() {
 		return childID;
 	}
 
-	public void setChildID(int childID) {
+	public void setChildID(Integer childID) {
 		this.childID = childID;
 	}
 
-	public long getUserID() {
+	public Integer getUserID() {
 		return userID;
 	}
 
-	public void setUserID(int userID) {
+	public void setUserID(Integer userID) {
 		this.userID = userID;
 	}
 
@@ -97,6 +97,77 @@ public class Category implements Serializable {
 
 	public void setModifiedDTM(Timestamp modDTM) {
 		this.modifiedDTM = modDTM;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + catID;
+		result = prime * result + ((childID == null) ? 0 : childID.hashCode());
+		result = prime * result + ((createdDTM == null) ? 0 : createdDTM.hashCode());
+		result = prime * result + ((description == null) ? 0 : description.hashCode());
+		result = prime * result + ((modifiedDTM == null) ? 0 : modifiedDTM.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((parentID == null) ? 0 : parentID.hashCode());
+		result = prime * result + ((userID == null) ? 0 : userID.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Category other = (Category) obj;
+		if (catID != other.catID)
+			return false;
+		if (childID == null) {
+			if (other.childID != null)
+				return false;
+		} else if (!childID.equals(other.childID))
+			return false;
+		if (createdDTM == null) {
+			if (other.createdDTM != null)
+				return false;
+		} else if (!createdDTM.equals(other.createdDTM))
+			return false;
+		if (description == null) {
+			if (other.description != null)
+				return false;
+		} else if (!description.equals(other.description))
+			return false;
+		if (modifiedDTM == null) {
+			if (other.modifiedDTM != null)
+				return false;
+		} else if (!modifiedDTM.equals(other.modifiedDTM))
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		if (parentID == null) {
+			if (other.parentID != null)
+				return false;
+		} else if (!parentID.equals(other.parentID))
+			return false;
+		if (userID == null) {
+			if (other.userID != null)
+				return false;
+		} else if (!userID.equals(other.userID))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Category [catID=" + catID + ", userID=" + userID + ", parentID=" + parentID + ", childID=" + childID
+				+ ", name=" + name + ", description=" + description + ", createdDTM=" + createdDTM + ", modifiedDTM="
+				+ modifiedDTM + "]";
 	}
 
 }

@@ -20,9 +20,9 @@ public class AppUser implements Serializable{
 	private static final long serialVersionUID = -6528351877018119894L;
 
 	@Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy=GenerationType.AUTO)
     @Column(name = "UserId")
-	private int userId;
+	private Integer userId;
 	
 	@Column(name = "FirstName")
 	private String firstName;
@@ -45,11 +45,11 @@ public class AppUser implements Serializable{
 	@Column(name = "ModifiedDTM")
 	private Timestamp modifiedDTM;
 
-	public int getUserId() {
+	public Integer getUserId() {
 		return userId;
 	}
 
-	public void setUserId(int userId) {
+	public void setUserId(Integer userId) {
 		this.userId = userId;
 	}
 

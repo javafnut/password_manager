@@ -96,7 +96,7 @@ public class PasswordUserModelRestTest {
 
 		for (int i = 0; i < NUM_CATEGORY_MAX; i++) {
 
-			int id = 101 + i;
+			Integer id = new Integer(101 + i);
 			Category cat = new Category();
 			cat.setCatID(id);
 			cat.setChildID(id);
@@ -117,7 +117,7 @@ public class PasswordUserModelRestTest {
 
 		for (int j = 0; j < NUM_SITES_MAX_PER_CATEGORY; j++) {
 			Site site = new Site();
-			site.setSiteId(idCounter.incrementAndGet());
+			site.setSiteId(new Integer(idCounter.incrementAndGet()));
 			site.setAppUserId(user.getUserId());
 			site.setCatId(cat.getCatID());
 			site.setSiteName("My_Site_Name_" + site.getSiteId());
