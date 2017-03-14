@@ -9,6 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.Column;
 import javax.persistence.GenerationType;
 
@@ -40,9 +42,11 @@ public class AppUser implements Serializable{
 	private byte[] password;
 	
 	@Column(name = "CreatedDTM")
+	@Temporal(TemporalType.TIMESTAMP)
 	private Timestamp createdDTM;
 	
 	@Column(name = "ModifiedDTM")
+	@Temporal(TemporalType.TIMESTAMP)
 	private Timestamp modifiedDTM;
 
 	public Integer getUserId() {

@@ -8,9 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Column;
 import javax.persistence.GenerationType;
-
-
-import javax.persistence.Column;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import java.util.Arrays;
 import java.sql.Timestamp;
@@ -50,9 +49,11 @@ public class Site implements Serializable {
 	private String notes;
 
 	@Column(name = "CreatedDTM")
-	private Timestamp createDTM;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Timestamp createdDTM;
 	
 	@Column(name = "ModifiedDTM")
+	@Temporal(TemporalType.TIMESTAMP)
 	private Timestamp modifiedDTM;
 
 	public int getSiteId() {
@@ -124,12 +125,12 @@ public class Site implements Serializable {
 		this.notes = notes;
 	}
 
-	public Timestamp getCreateDTM() {
-		return createDTM;
+	public Timestamp getCreatedDTM() {
+		return createdDTM;
 	}
 
-	public void setCreateDTM(Timestamp created) {
-		this.createDTM = created;
+	public void setCreatedDTM(Timestamp created) {
+		this.createdDTM = created;
 	}
 
 	public Timestamp getModifiedDTM() {
@@ -144,18 +145,20 @@ public class Site implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + (int) (appUserId ^ (appUserId >>> 32));
-		result = prime * result + (int) (catId ^ (catId >>> 32));
-		result = prime * result + ((createDTM == null) ? 0 : createDTM.hashCode());
+		result = prime * result + ((appUserId == null) ? 0 : appUserId.hashCode());
+		result = prime * result + ((catId == null) ? 0 : catId.hashCode());
+		result = prime * result + ((createdDTM == null) ? 0 : createdDTM.hashCode());
+		result = prime * result + ((login == null) ? 0 : login.hashCode());
 		result = prime * result + ((modifiedDTM == null) ? 0 : modifiedDTM.hashCode());
 		result = prime * result + ((notes == null) ? 0 : notes.hashCode());
 		result = prime * result + Arrays.hashCode(password);
-		result = prime * result + (int) (siteId ^ (siteId >>> 32));
-		result = prime * result + ((login == null) ? 0 : login.hashCode());
+		result = prime * result + ((siteId == null) ? 0 : siteId.hashCode());
 		result = prime * result + ((siteName == null) ? 0 : siteName.hashCode());
 		result = prime * result + ((siteURL == null) ? 0 : siteURL.hashCode());
 		return result;
 	}
+
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -166,14 +169,25 @@ public class Site implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Site other = (Site) obj;
-		if (appUserId != other.appUserId)
-			return false;
-		if (catId != other.catId)
-			return false;
-		if (createDTM == null) {
-			if (other.createDTM != null)
+		if (appUserId == null) {
+			if (other.appUserId != null)
 				return false;
-		} else if (!createDTM.equals(other.createDTM))
+		} else if (!appUserId.equals(other.appUserId))
+			return false;
+		if (catId == null) {
+			if (other.catId != null)
+				return false;
+		} else if (!catId.equals(other.catId))
+			return false;
+		if (createdDTM == null) {
+			if (other.createdDTM != null)
+				return false;
+		} else if (!createdDTM.equals(other.createdDTM))
+			return false;
+		if (login == null) {
+			if (other.login != null)
+				return false;
+		} else if (!login.equals(other.login))
 			return false;
 		if (modifiedDTM == null) {
 			if (other.modifiedDTM != null)
@@ -187,12 +201,10 @@ public class Site implements Serializable {
 			return false;
 		if (!Arrays.equals(password, other.password))
 			return false;
-		if (siteId != other.siteId)
-			return false;
-		if (login == null) {
-			if (other.login != null)
+		if (siteId == null) {
+			if (other.siteId != null)
 				return false;
-		} else if (!login.equals(other.login))
+		} else if (!siteId.equals(other.siteId))
 			return false;
 		if (siteName == null) {
 			if (other.siteName != null)
@@ -206,12 +218,14 @@ public class Site implements Serializable {
 			return false;
 		return true;
 	}
+	
 
 	@Override
 	public String toString() {
 		return "Site [siteId=" + siteId + ", siteName=" + siteName + ", catId=" + catId + ", appUserId=" + appUserId
 				+ ", siteURL=" + siteURL + ", siteLogin=" + login + ", password=" + Arrays.toString(password)
-				+ ", notes=" + notes + ", createDTM=" + createDTM + ", modifiedDTM=" + modifiedDTM + "]";
+				+ ", notes=" + notes + ", createdDTM=" + createdDTM + ", modifiedDTM=" + modifiedDTM + "]";
 	}
+
 
 }

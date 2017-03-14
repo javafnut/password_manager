@@ -7,32 +7,45 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.Column;
 import javax.persistence.GenerationType;
 
 @Entity
-@Table(name="Category")
+@Table(name = "Category")
 public class Category implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -9036879502053475149L;
 	public static final int ROOT_ID = 100;
 	public static final String ROOT_NAME = "ROOT";
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="catID")
+	@Column(name = "CatId")
 	private Integer catID;
     
-	@Column()
-	private Integer userID;
-	private Integer parentID;
-	private Integer childID;
+	@Column(name = "UserId" )
+	private Integer userId;
+	
+	@Column(name = "ParentId")
+	private Integer parentId;
+	
+	@Column(name = "ChildId")
+	private Integer childId;
+	
+	@Column(name = "Name")
 	private String name;
+	
+	@Column(name = "Description")
 	private String description;
+
+	@Column(name = "CreatedDTM")
+	@Temporal(TemporalType.TIMESTAMP)
 	private Timestamp createdDTM;
+	
+	@Column(name = "ModifiedDTM")
+	@Temporal(TemporalType.TIMESTAMP)
 	private Timestamp modifiedDTM;
 
 	public Integer getCatID() {
@@ -59,28 +72,28 @@ public class Category implements Serializable {
 		this.description = description;
 	}
 
-	public Integer getParentID() {
-		return parentID;
+	public Integer getParentId() {
+		return parentId;
 	}
 
-	public void setParentID(Integer parentID) {
-		this.parentID = parentID;
+	public void setParentId(Integer parentId) {
+		this.parentId = parentId;
 	}
 
-	public Integer getChildID() {
-		return childID;
+	public Integer getChildId() {
+		return childId;
 	}
 
-	public void setChildID(Integer childID) {
-		this.childID = childID;
+	public void setChildId(Integer childId) {
+		this.childId = childId;
 	}
 
-	public Integer getUserID() {
-		return userID;
+	public Integer getUserId() {
+		return userId;
 	}
 
 	public void setUserID(Integer userID) {
-		this.userID = userID;
+		this.userId = userID;
 	}
 
 	public Timestamp getCreatedDTM() {
@@ -103,14 +116,14 @@ public class Category implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + catID;
-		result = prime * result + ((childID == null) ? 0 : childID.hashCode());
+		result = prime * result + ((catID == null) ? 0 : catID.hashCode());
+		result = prime * result + ((childId == null) ? 0 : childId.hashCode());
 		result = prime * result + ((createdDTM == null) ? 0 : createdDTM.hashCode());
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + ((modifiedDTM == null) ? 0 : modifiedDTM.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((parentID == null) ? 0 : parentID.hashCode());
-		result = prime * result + ((userID == null) ? 0 : userID.hashCode());
+		result = prime * result + ((parentId == null) ? 0 : parentId.hashCode());
+		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
 		return result;
 	}
 
@@ -123,12 +136,15 @@ public class Category implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Category other = (Category) obj;
-		if (catID != other.catID)
-			return false;
-		if (childID == null) {
-			if (other.childID != null)
+		if (catID == null) {
+			if (other.catID != null)
 				return false;
-		} else if (!childID.equals(other.childID))
+		} else if (!catID.equals(other.catID))
+			return false;
+		if (childId == null) {
+			if (other.childId != null)
+				return false;
+		} else if (!childId.equals(other.childId))
 			return false;
 		if (createdDTM == null) {
 			if (other.createdDTM != null)
@@ -150,24 +166,26 @@ public class Category implements Serializable {
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
-		if (parentID == null) {
-			if (other.parentID != null)
+		if (parentId == null) {
+			if (other.parentId != null)
 				return false;
-		} else if (!parentID.equals(other.parentID))
+		} else if (!parentId.equals(other.parentId))
 			return false;
-		if (userID == null) {
-			if (other.userID != null)
+		if (userId == null) {
+			if (other.userId != null)
 				return false;
-		} else if (!userID.equals(other.userID))
+		} else if (!userId.equals(other.userId))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Category [catID=" + catID + ", userID=" + userID + ", parentID=" + parentID + ", childID=" + childID
+		return "Category [catID=" + catID + ", userId=" + userId + ", parentId=" + parentId + ", childId=" + childId
 				+ ", name=" + name + ", description=" + description + ", createdDTM=" + createdDTM + ", modifiedDTM="
 				+ modifiedDTM + "]";
 	}
 
+	
 }
+

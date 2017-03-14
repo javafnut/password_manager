@@ -76,9 +76,9 @@ public class PasswordUserModelRestTest {
 		// Setup root category, all id's are set to ROOT_ID
 		Category category = new Category();
 		category.setCatID(Category.ROOT_ID);
-		category.setChildID(Category.ROOT_ID); // ROOT is it's own child by
+		category.setChildId(Category.ROOT_ID); // ROOT is it's own child by
 												// design
-		category.setParentID(Category.ROOT_ID);
+		category.setParentId(Category.ROOT_ID);
 		category.setDescription(Category.ROOT_NAME);
 		category.setUserID(pwdUserModel.getAppUser().getUserId());
 		category.setName(Category.ROOT_NAME);
@@ -99,8 +99,8 @@ public class PasswordUserModelRestTest {
 			Integer id = new Integer(101 + i);
 			Category cat = new Category();
 			cat.setCatID(id);
-			cat.setChildID(id);
-			cat.setParentID(Category.ROOT_ID);
+			cat.setChildId(id);
+			cat.setParentId(Category.ROOT_ID);
 			cat.setDescription(id + "- Description");
 			cat.setUserID(pwdUserModel.getAppUser().getUserId());
 			cat.setName("Category - " + id);
@@ -124,8 +124,8 @@ public class PasswordUserModelRestTest {
 			site.setSiteURL("http://foobar.com/foobar");
 			site.setNotes("My_Site_Notes_" + site.getSiteId());
 			site.setLogin("Login_Name_" + site.getSiteId());
-			site.setCreateDTM(new Timestamp(calendar.getTimeInMillis()));
-			site.setModifiedDTM(site.getCreateDTM());
+			site.setCreatedDTM(new Timestamp(calendar.getTimeInMillis()));
+			site.setModifiedDTM(site.getCreatedDTM());
 
 			try {
 				byte[] salt = user.getSalt();
