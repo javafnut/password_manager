@@ -8,13 +8,17 @@ import java.sql.Statement;
 
 public class JPAUtil {
 
-    // Database configuration
-    // Database configuration
-    public static String url = "jdbc:mysql://localhost:3306/pwddb?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
-	//public static String url = "jdbc:mysql://localhost:3306/pwddb";
-	public static String dbdriver = "com.mysql.jdbc.Driver";
-	//public static String dbdriver = "com.mysql.di.jdbc.Driver";
-    public static String username = "pwduser";
+
+
+	// MySql
+  public static String url = "jdbc:mysql://localhost:3306/pwddb?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+  public static String dbdriver = "com.mysql.jdbc.Driver";
+
+	// Derby
+//    public static String url = "jdbc:derby://localhost:1527/pwddb";
+//    public static String dbdriver = "org.apache.derby.jdbc.ClientDriver";
+	
+	public static String username = "pwduser";
     public static String password = "max3488JnkoK!";
     static Statement st;
     static Connection conn;

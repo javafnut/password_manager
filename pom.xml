@@ -67,24 +67,31 @@
 			<version>6.0.5</version>
 		</dependency>
 		
-		
-		
-		<!-- Hibernate 5.2.6 Final -->
- 		<dependency>
+	<!-- Hibernate 5.2.6 Final -->
+     	<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
 			<version>5.2.6.Final</version>
 		</dependency>
-	
-				<!-- Hibernate 5.2.6 Final 
+
+      <!-- Top Link  - Derby -->
+
 		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-core</artifactId>
-			<version>4.2.5.Final</version>
+			<groupId>toplink.essentials</groupId>
+			<artifactId>toplink-essentials-agent</artifactId>
+			<version>2.0-36</version>
 		</dependency>
-	 -->	
-
-
+		<dependency>
+			<groupId>toplink.essentials</groupId>
+			<artifactId>toplink-essentials</artifactId>
+			<version>2.0-36</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.derby</groupId>
+			<artifactId>derbyclient</artifactId>
+			<version>10.8.2.2</version>
+		</dependency>
+ 
 	</dependencies>
 
 	<build>

@@ -20,7 +20,6 @@ import javax.persistence.GenerationType;
 public class AppUser implements Serializable{
 
 	private static final long serialVersionUID = -6528351877018119894L;
-
 	
 	@Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
