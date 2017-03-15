@@ -23,7 +23,7 @@ public class Site implements Serializable {
 	private static final long serialVersionUID = 6874935206297050168L;
 
 	@Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "SiteId")
 	private Integer siteId;
 	
@@ -42,18 +42,18 @@ public class Site implements Serializable {
 	@Column(name = "Login")
 	private String login;
 	
-	@Column(name = "Password")
+	@Column(name = "SitePwd")
 	private byte[] password;
 	
 	@Column(name = "Notes")
 	private String notes;
 
 	@Column(name = "CreatedDTM")
-	@Temporal(TemporalType.TIMESTAMP)
+	// @Temporal(TemporalType.TIMESTAMP)
 	private Timestamp createdDTM;
 	
 	@Column(name = "ModifiedDTM")
-	@Temporal(TemporalType.TIMESTAMP)
+	// @Temporal(TemporalType.TIMESTAMP)
 	private Timestamp modifiedDTM;
 
 	public int getSiteId() {

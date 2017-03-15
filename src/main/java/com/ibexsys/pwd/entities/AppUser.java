@@ -21,8 +21,9 @@ public class AppUser implements Serializable{
 
 	private static final long serialVersionUID = -6528351877018119894L;
 
+	
 	@Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "UserId")
 	private Integer userId;
 	
@@ -42,11 +43,11 @@ public class AppUser implements Serializable{
 	private byte[] password;
 	
 	@Column(name = "CreatedDTM")
-	@Temporal(TemporalType.TIMESTAMP)
+//	@Temporal(TemporalType.TIMESTAMP)
 	private Timestamp createdDTM;
 	
 	@Column(name = "ModifiedDTM")
-	@Temporal(TemporalType.TIMESTAMP)
+//	@Temporal(TemporalType.TIMESTAMP)
 	private Timestamp modifiedDTM;
 
 	public Integer getUserId() {

@@ -1,45 +1,38 @@
 package com.ibexsys.pwd.util;
 
 
-import org.hibernate.*;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistryBuilder;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
+
+//import com.ibexsys.pwd.entities.AppUser;
+//import com.ibexsys.pwd.entities.Category;
+//import com.ibexsys.pwd.entities.Site;
+
 
 public class HibernateCheck {
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		
-		Configuration configuration = new Configuration();
-        configuration.configure("hibernate.cfg.xml");
-        ServiceRegistryBuilder serviceRegistryBuilder = new ServiceRegistryBuilder().applySettings(configuration
-                            .getProperties());
-        SessionFactory sessionFactory = configuration
-                            .buildSessionFactory(serviceRegistryBuilder.buildServiceRegistry());
-        Session session = sessionFactory.openSession();
-        
-        
-        Transaction tx = null;
-        
-        try {
-        	tx = session.beginTransaction();
-        	
-            tx.commit();
-            tx = null;
-        
-        } catch (HibernateException e){
-        	if (tx != null) tx.rollback();
-        	e.printStackTrace();
-        } 
-        finally {
-        	session.close();
-        }
-        
-        //Display Tables
-        HibernateUtil.checkData("select * from AppUser");
-        HibernateUtil.checkData("select * from Category");
-        HibernateUtil.checkData("select * from Site");
-    
-	}
+    public static void main(String[] args) throws Exception {
 
+        // Set up the table and data for testing
+        JPAUtil.droptable("drop table SEQUENCE");
+
+        // Perform JPA operation
+        EntityManagerFactory emf =
+                Persistence.createEntityManagerFactory("PwdManagerDbService");
+        EntityManager em = emf.createEntityManager();
+
+        em.getTransaction().begin();
+
+       
+        em.close();
+        emf.close();
+
+        // Display the table for verification
+        JPAUtil.checkData("select * from AppUser");
+        JPAUtil.checkData("select * from Category");
+        JPAUtil.checkData("Select * from Site");
+    }
 }
+

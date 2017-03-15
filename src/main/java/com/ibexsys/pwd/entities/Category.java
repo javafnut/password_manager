@@ -21,7 +21,7 @@ public class Category implements Serializable {
 	public static final String ROOT_NAME = "ROOT";
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "CatId")
 	private Integer catID;
     
@@ -41,11 +41,11 @@ public class Category implements Serializable {
 	private String description;
 
 	@Column(name = "CreatedDTM")
-	@Temporal(TemporalType.TIMESTAMP)
+	// @Temporal(TemporalType.TIMESTAMP)
 	private Timestamp createdDTM;
 	
 	@Column(name = "ModifiedDTM")
-	@Temporal(TemporalType.TIMESTAMP)
+	// @Temporal(TemporalType.TIMESTAMP)
 	private Timestamp modifiedDTM;
 
 	public Integer getCatID() {

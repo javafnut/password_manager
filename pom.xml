@@ -70,19 +70,19 @@
 		
 		
 		<!-- Hibernate 5.2.6 Final -->
-<!-- 		<dependency>
+ 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
 			<version>5.2.6.Final</version>
 		</dependency>
--->		
-				<!-- Hibernate 5.2.6 Final -->
+	
+				<!-- Hibernate 5.2.6 Final 
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
 			<version>4.2.5.Final</version>
 		</dependency>
-		
+	 -->	
 
 
 	</dependencies>
