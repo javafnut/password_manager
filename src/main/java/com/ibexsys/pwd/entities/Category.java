@@ -7,8 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.persistence.Column;
 import javax.persistence.GenerationType;
 
@@ -17,16 +15,13 @@ import javax.persistence.GenerationType;
 public class Category implements Serializable {
 
 	private static final long serialVersionUID = -9036879502053475149L;
-	public static final int ROOT_ID = 100;
 	public static final String ROOT_NAME = "ROOT";
+	public static final Integer NO_ID = 0;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "CatId")
 	private Integer catID;
-    
-	@Column(name = "UserId" )
-	private Integer userId;
 	
 	@Column(name = "ParentId")
 	private Integer parentId;
@@ -88,14 +83,6 @@ public class Category implements Serializable {
 		this.childId = childId;
 	}
 
-	public Integer getUserId() {
-		return userId;
-	}
-
-	public void setUserID(Integer userID) {
-		this.userId = userID;
-	}
-
 	public Timestamp getCreatedDTM() {
 		return createdDTM;
 	}
@@ -123,7 +110,6 @@ public class Category implements Serializable {
 		result = prime * result + ((modifiedDTM == null) ? 0 : modifiedDTM.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((parentId == null) ? 0 : parentId.hashCode());
-		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
 		return result;
 	}
 
@@ -171,20 +157,15 @@ public class Category implements Serializable {
 				return false;
 		} else if (!parentId.equals(other.parentId))
 			return false;
-		if (userId == null) {
-			if (other.userId != null)
-				return false;
-		} else if (!userId.equals(other.userId))
-			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Category [catID=" + catID + ", userId=" + userId + ", parentId=" + parentId + ", childId=" + childId
-				+ ", name=" + name + ", description=" + description + ", createdDTM=" + createdDTM + ", modifiedDTM="
-				+ modifiedDTM + "]";
+		return "Category [catID=" + catID + ", parentId=" + parentId + ", childId=" + childId + ", name=" + name
+				+ ", description=" + description + ", createdDTM=" + createdDTM + ", modifiedDTM=" + modifiedDTM + "]";
 	}
+
 
 	
 }

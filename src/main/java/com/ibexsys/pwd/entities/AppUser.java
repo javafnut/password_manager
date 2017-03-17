@@ -6,17 +6,17 @@ import java.util.Arrays;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
+import javax.persistence.Table;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.persistence.Column;
 import javax.persistence.GenerationType;
 
 
+
 @Entity
 @Table(name = "AppUser")
+//@SequenceGenerator(name = "userId_gen", sequenceName = "userId_gen",  initialValue = 1000)
 public class AppUser implements Serializable{
 
 	private static final long serialVersionUID = -6528351877018119894L;
@@ -42,11 +42,9 @@ public class AppUser implements Serializable{
 	private byte[] password;
 	
 	@Column(name = "CreatedDTM")
-//	@Temporal(TemporalType.TIMESTAMP)
 	private Timestamp createdDTM;
 	
 	@Column(name = "ModifiedDTM")
-//	@Temporal(TemporalType.TIMESTAMP)
 	private Timestamp modifiedDTM;
 
 	public Integer getUserId() {

@@ -8,8 +8,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Column;
 import javax.persistence.GenerationType;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import java.util.Arrays;
 import java.sql.Timestamp;
@@ -49,11 +47,9 @@ public class Site implements Serializable {
 	private String notes;
 
 	@Column(name = "CreatedDTM")
-	// @Temporal(TemporalType.TIMESTAMP)
 	private Timestamp createdDTM;
 	
 	@Column(name = "ModifiedDTM")
-	// @Temporal(TemporalType.TIMESTAMP)
 	private Timestamp modifiedDTM;
 
 	public int getSiteId() {

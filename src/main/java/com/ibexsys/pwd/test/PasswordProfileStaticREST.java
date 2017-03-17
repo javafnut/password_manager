@@ -31,17 +31,17 @@ import org.springframework.stereotype.Component;
 
 import com.ibexsys.pwd.entities.AppUser;
 import com.ibexsys.pwd.entities.Category;
-import com.ibexsys.pwd.entities.PasswordUserModel;
+import com.ibexsys.pwd.entities.PwdAppProfile;
 import com.ibexsys.pwd.entities.Site;
 
 import com.ibexsys.pwd.services.PasswordEncryptionService;
 
 @Component
 @Path("/testpwd")
-public class PasswordUserModelRestTest {
+public class PasswordProfileStaticREST {
 
 	private static AtomicInteger idCounter = new AtomicInteger();
-	private static PasswordUserModel pwdUserModel = new PasswordUserModel();
+	private static PwdAppProfile appProfile = PwdAppProfile.getInstance();
 
 	static {
 
@@ -52,7 +52,7 @@ public class PasswordUserModelRestTest {
 		byte[] lSalt = null;
 		byte[] lEncPwd = null;
 		Random random = new Random();
-		Calendar calendar = Calendar.getInstance();
+
 
 		try {
 			lSalt = PasswordEncryptionService.generateSalt();
@@ -60,6 +60,12 @@ public class PasswordUserModelRestTest {
 		} catch (Exception e) {
 			System.out.println(e.getStackTrace());
 		}
+		
+		appProfile.setProfileId(1000);
+		appProfile.setLoginName("FooBarLogin");
+		appProfile.setCreatedDTM(new Timestamp(Calendar.getInstance().getTimeInMillis()));
+		appProfile.setModifiedDTM(appProfile.getCreatedDTM());
+		appProfile.setLastLoginDTM(appProfile.getCreatedDTM());
 
 		AppUser user = new AppUser();
 		user.setUserId(1000);
@@ -68,25 +74,28 @@ public class PasswordUserModelRestTest {
 		user.setEmail("foo@foobar.com");
 		user.setSalt(lSalt);
 		user.setPassword(lEncPwd);
-		user.setCreatedDTM(new Timestamp(calendar.getTimeInMillis()));
+		user.setCreatedDTM(new Timestamp(Calendar.getInstance().getTimeInMillis()));
 		user.setModifiedDTM(user.getCreatedDTM());
 
-		pwdUserModel.setAppUser(user);
+		appProfile.setAppUser(user);
+		appProfile.setAppUserId(user.getUserId());
+
 
 		// Setup root category, all id's are set to ROOT_ID
 		Category category = new Category();
-		category.setCatID(Category.ROOT_ID);
-		category.setChildId(Category.ROOT_ID); // ROOT is it's own child by
+		category.setCatID(user.getUserId());
+		category.setChildId(Category.NO_ID); // ROOT is it's own child by
 												// design
-		category.setParentId(Category.ROOT_ID);
+		category.setParentId(category.getCatID());
 		category.setDescription(Category.ROOT_NAME);
-		category.setUserID(pwdUserModel.getAppUser().getUserId());
 		category.setName(Category.ROOT_NAME);
-		category.setCreatedDTM(new Timestamp(calendar.getTimeInMillis()));
+		category.setCreatedDTM(new Timestamp(Calendar.getInstance().getTimeInMillis()));
 		category.setModifiedDTM(category.getCreatedDTM());
+		
+		appProfile.setRootId(category.getCatID());
 
 		try {
-			pwdUserModel.addCategory(category);
+			appProfile.addCategory(category);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -100,15 +109,14 @@ public class PasswordUserModelRestTest {
 			Category cat = new Category();
 			cat.setCatID(id);
 			cat.setChildId(id);
-			cat.setParentId(Category.ROOT_ID);
+			cat.setParentId(Category.NO_ID);
 			cat.setDescription(id + "- Description");
-			cat.setUserID(pwdUserModel.getAppUser().getUserId());
 			cat.setName("Category - " + id);
-			cat.setCreatedDTM(new Timestamp(calendar.getTimeInMillis()));
+			cat.setCreatedDTM(new Timestamp(Calendar.getInstance().getTimeInMillis()));
 			cat.setModifiedDTM(category.getCreatedDTM());
 
 			try {
-				pwdUserModel.addCategory(cat);
+				appProfile.addCategory(cat);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -124,7 +132,7 @@ public class PasswordUserModelRestTest {
 			site.setSiteURL("http://foobar.com/foobar");
 			site.setNotes("My_Site_Notes_" + site.getSiteId());
 			site.setLogin("Login_Name_" + site.getSiteId());
-			site.setCreatedDTM(new Timestamp(calendar.getTimeInMillis()));
+			site.setCreatedDTM(new Timestamp(Calendar.getInstance().getTimeInMillis()));
 			site.setModifiedDTM(site.getCreatedDTM());
 
 			try {
@@ -138,22 +146,45 @@ public class PasswordUserModelRestTest {
 			}
 
 			try {
-				pwdUserModel.addSite(site);
+				appProfile.addSite(site);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
-		}
+		  }
 		}
 	}
+	
+	@GET
+	@Produces({"application/json"})
+	public Response getUserAppProfile(){
+
+		PwdAppProfile pwdModel = appProfile;	
+		
+     return Response.ok().entity(pwdModel).type(MediaType.APPLICATION_JSON).build();
+     
+	}
+	
+	
+	@GET
+	@Path("/appProfile")
+	@Produces({"application/json"})
+	public Response getUserAppProfileInfo(){
+
+		PwdAppProfile pwdModel = appProfile;	
+		
+     return Response.ok().entity(pwdModel).type(MediaType.APPLICATION_JSON).build();
+     
+	}
+	
 	
 	
 	@GET
 	@Path("/user")
 	@Produces({"application/json"})
 	public Response getAppUserInfo(){
-		AppUser user = pwdUserModel.getAppUser();
+		AppUser user = appProfile.getAppUser();
 		
 	    return Response.ok().entity(user).type(MediaType.APPLICATION_JSON).build();
 	}
@@ -163,7 +194,7 @@ public class PasswordUserModelRestTest {
 	@Path("/categories")
 	@Produces({"application/json"})
 	public Response getCategories(){
-		Map<String,Category> catMap = pwdUserModel.getCategoryMap();
+		Map<String,Category> catMap = appProfile.getCategoryMap();
 		return Response.ok().entity(catMap).type(MediaType.APPLICATION_JSON).build();
 	}
 	
@@ -172,7 +203,7 @@ public class PasswordUserModelRestTest {
 	@Produces({"application/json"})
 	public Response getCategory(@PathParam("id") String id){
 		
-		PasswordUserModel pwdModel = pwdUserModel;
+		PwdAppProfile pwdModel = appProfile;
 
 		Category category = (Category) pwdModel.getCategoryMap().get(id);
 		
@@ -186,7 +217,7 @@ public class PasswordUserModelRestTest {
 	@Path("/site/{id}")
 	@Produces({"application/json"})
 	public Response getSite(@PathParam("id") String id){
-		PasswordUserModel pwdModel = pwdUserModel;
+		PwdAppProfile pwdModel = appProfile;
 		Site site = (Site) pwdModel.getSitesMap().get(id);
 		
 		return Response.ok().entity(site).type(MediaType.APPLICATION_JSON).build();
@@ -197,27 +228,27 @@ public class PasswordUserModelRestTest {
 	@Path("/sites")
 	@Produces({"application/json"})
 	public Response getSites(){
-		PasswordUserModel pwdModel = pwdUserModel;
+		PwdAppProfile pwdModel = appProfile;
 		Map<String,Site> sites = pwdModel.getSitesMap();
 		
 		return Response.ok().entity(sites).type(MediaType.APPLICATION_JSON).build();
 	}
 	
 
-	// Static Dump
-	@GET
-	@Produces({ "application/json" })
-	public Response getPwdUserModel() {
-		PasswordUserModel pwdModel = pwdUserModel;
-		return Response.ok().entity(pwdModel).type(MediaType.APPLICATION_JSON).build();
-
-	}
+//	// Static Dump
+//	@GET
+//	@Produces({ "application/json" })
+//	public Response getPwdUserModel() {
+//		PwdAppProfile pwdModel = appProfile;
+//		return Response.ok().entity(pwdModel).type(MediaType.APPLICATION_JSON).build();
+//
+//	}
 
 	@GET
 	@Path("/xml")
 	@Produces({ "application/xml" })
 	public Response getPwdUserModel2XML() {
-		PasswordUserModel pwdModel = pwdUserModel;
+		PwdAppProfile pwdModel = appProfile;
 		return Response.ok().entity(pwdModel).type(MediaType.APPLICATION_XML).build();
 
 	}

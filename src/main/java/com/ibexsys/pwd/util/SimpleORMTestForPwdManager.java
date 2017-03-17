@@ -23,7 +23,8 @@ public class SimpleORMTestForPwdManager {
 		byte[] lSalt = null;
 		byte[] lEncPwd = null;
 		Random random = new Random();
-		Calendar calendar = Calendar.getInstance();
+		Timestamp testTimestamp = new Timestamp(Calendar.getInstance().getTimeInMillis());
+		
 
 		try {
 			lSalt = PasswordEncryptionService.generateSalt();
@@ -34,34 +35,44 @@ public class SimpleORMTestForPwdManager {
 		
 		em.getTransaction().begin();
 
+		PwdAppProfile appProfile = PwdAppProfile.getInstance();
+		appProfile.setLoginName("FooBarLogin");
+		appProfile.setCreatedDTM(testTimestamp);
+		appProfile.setModifiedDTM(appProfile.getCreatedDTM());
+		appProfile.setLastLoginDTM(testTimestamp);
+		
+		
 		AppUser user = new AppUser();
 		user.setFirstName("Todd");
 		user.setLastName("Johnston");
 		user.setEmail("foo@foobar.com");
 		user.setSalt(lSalt);
 		user.setPassword(lEncPwd);
-		user.setCreatedDTM(new Timestamp(calendar.getTimeInMillis()));
+		user.setCreatedDTM(testTimestamp);
 		user.setModifiedDTM(user.getCreatedDTM());
 		
 	    em.persist(user);
-		
+	    
+		appProfile.setAppUserId(user.getUserId());		
 	    System.out.println(user.toString());
 	    
-		// Setup root category, all id's are set to ROOT_ID
+		// Setup root category
 		Category category = new Category();
-		category.setChildId(Category.ROOT_ID); // ROOT is it's own child by
-     	category.setParentId(Category.ROOT_ID);
+		category.setChildId(Category.NO_ID); 
+     	category.setParentId(Category.NO_ID);
 		category.setDescription(Category.ROOT_NAME);
-		category.setUserID(user.getUserId());
 		category.setName(Category.ROOT_NAME);
-		category.setCreatedDTM(new Timestamp(calendar.getTimeInMillis()));
+		category.setCreatedDTM(testTimestamp);
 		category.setModifiedDTM(category.getCreatedDTM());
 		
 		em.persist(category);
-		
-		
-		
-		
+ 
+		// Now setup the root category, root is it's own parent
+		category.setParentId(category.getCatID());
+		appProfile.setRootId(category.getCatID());
+	
+		em.persist(category);
+
 		Site site = new Site();
 		site.setAppUserId(user.getUserId());
 		site.setCatId(category.getCatID());
@@ -69,33 +80,37 @@ public class SimpleORMTestForPwdManager {
 		site.setSiteURL("http://foobar.com/foobar");
 		site.setNotes("My_Site_Notes_");
 		site.setLogin("Login_Name_");
-		site.setCreatedDTM(new Timestamp(calendar.getTimeInMillis()));
+		site.setCreatedDTM(testTimestamp);
 		site.setModifiedDTM(site.getCreatedDTM());
 		
 	    em.persist(site);
+	    em.persist(appProfile);
+	    
 		em.getTransaction().commit();
 		
 	}
 
-    public static void DeleteData(EntityManager em){
-    	
+    public static void DeleteData(){
+
+    	JPAUtil.simpleDelete("delete from AppUser");
+    	JPAUtil.simpleDelete("delete from Category");
+    	JPAUtil.simpleDelete("delete from Site");
+    	JPAUtil.simpleDelete("delete from UserAppProfile");
     }
 	
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
+		SimpleORMTestForPwdManager.DeleteData();
 		
         // Perform JPA operation
         EntityManagerFactory emf =
                 Persistence.createEntityManagerFactory("PwdManagerDbService");
         EntityManager em = emf.createEntityManager();
-
-       
+      
       
         SimpleORMTestForPwdManager.createTestData(em);
-        
-
         
         em.close();
         emf.close();
@@ -104,6 +119,7 @@ public class SimpleORMTestForPwdManager {
         JPAUtil.checkData("select * from AppUser");
         JPAUtil.checkData("select * from Category");
         JPAUtil.checkData("Select * from Site");
+        JPAUtil.checkData("select * from UserAppProfile");
         
         
 

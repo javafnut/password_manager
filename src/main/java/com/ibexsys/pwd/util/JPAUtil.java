@@ -66,6 +66,15 @@ public class JPAUtil {
         } catch (Exception e) {
         }
     }
+    
+    public static void simpleDelete(String sql){
+    	
+    try {
+        createStatement();
+        st.executeUpdate(sql);
+    } catch (Exception e) {
+    }
+    }
 
     public void executeSQLCommand(String sql) throws Exception {
         st.executeUpdate(sql);

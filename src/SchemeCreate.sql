@@ -8,7 +8,7 @@ CREATE TABLE `AppUser` (
   `ModifiedDTM` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `Password` varbinary(64) NOT NULL,
   PRIMARY KEY (`UserId`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
 CREATE TABLE `Category` (
   `CatId` int(11) NOT NULL AUTO_INCREMENT,
@@ -20,6 +20,16 @@ CREATE TABLE `Category` (
   `ModifiedDTM` datetime DEFAULT NULL,
   `ChildId` int(11) NOT NULL,
   PRIMARY KEY (`CatId`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+
+CREATE TABLE `Category_Defaults` (
+  `CatId` int(11) NOT NULL DEFAULT '0',
+  `Name` varchar(45) NOT NULL,
+  `Description` varchar(255) DEFAULT NULL,
+  `ParentId` int(11) NOT NULL,
+  `CreatedDTM` datetime DEFAULT CURRENT_TIMESTAMP,
+  `ModifiedDTM` datetime DEFAULT NULL,
+  `ChildId` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `Site` (
@@ -34,7 +44,18 @@ CREATE TABLE `Site` (
   `CreatedDTM` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `ModifiedDTM` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`SiteId`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+
+CREATE TABLE `UserAppProfile` (
+  `ProfileId` int(11) NOT NULL AUTO_INCREMENT,
+  `CategoryRootId` int(11) DEFAULT NULL,
+  `Login` varchar(64) NOT NULL,
+  `LastLoginDTM` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `CreatedDTM` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `ModifiedDTM` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`ProfileId`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
 
 
 
