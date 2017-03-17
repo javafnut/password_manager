@@ -35,7 +35,7 @@ public class SimpleORMTestForPwdManager {
 		
 		em.getTransaction().begin();
 
-		PwdAppProfile appProfile = PwdAppProfile.getInstance();
+		PasswordAppProfile appProfile = PasswordAppProfile.getInstance();
 		appProfile.setLoginName("FooBarLogin");
 		appProfile.setCreatedDTM(testTimestamp);
 		appProfile.setModifiedDTM(appProfile.getCreatedDTM());

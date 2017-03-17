@@ -31,7 +31,7 @@ import org.springframework.stereotype.Component;
 
 import com.ibexsys.pwd.entities.AppUser;
 import com.ibexsys.pwd.entities.Category;
-import com.ibexsys.pwd.entities.PwdAppProfile;
+import com.ibexsys.pwd.entities.PasswordAppProfile;
 import com.ibexsys.pwd.entities.Site;
 
 import com.ibexsys.pwd.services.PasswordEncryptionService;
@@ -41,7 +41,7 @@ import com.ibexsys.pwd.services.PasswordEncryptionService;
 public class PasswordProfileStaticREST {
 
 	private static AtomicInteger idCounter = new AtomicInteger();
-	private static PwdAppProfile appProfile = PwdAppProfile.getInstance();
+	private static PasswordAppProfile appProfile = PasswordAppProfile.getInstance();
 
 	static {
 
@@ -160,7 +160,7 @@ public class PasswordProfileStaticREST {
 	@Produces({"application/json"})
 	public Response getUserAppProfile(){
 
-		PwdAppProfile pwdModel = appProfile;	
+		PasswordAppProfile pwdModel = appProfile;	
 		
      return Response.ok().entity(pwdModel).type(MediaType.APPLICATION_JSON).build();
      
@@ -172,7 +172,7 @@ public class PasswordProfileStaticREST {
 	@Produces({"application/json"})
 	public Response getUserAppProfileInfo(){
 
-		PwdAppProfile pwdModel = appProfile;	
+		PasswordAppProfile pwdModel = appProfile;	
 		
      return Response.ok().entity(pwdModel).type(MediaType.APPLICATION_JSON).build();
      
@@ -203,7 +203,7 @@ public class PasswordProfileStaticREST {
 	@Produces({"application/json"})
 	public Response getCategory(@PathParam("id") String id){
 		
-		PwdAppProfile pwdModel = appProfile;
+		PasswordAppProfile pwdModel = appProfile;
 
 		Category category = (Category) pwdModel.getCategoryMap().get(id);
 		
@@ -217,7 +217,7 @@ public class PasswordProfileStaticREST {
 	@Path("/site/{id}")
 	@Produces({"application/json"})
 	public Response getSite(@PathParam("id") String id){
-		PwdAppProfile pwdModel = appProfile;
+		PasswordAppProfile pwdModel = appProfile;
 		Site site = (Site) pwdModel.getSitesMap().get(id);
 		
 		return Response.ok().entity(site).type(MediaType.APPLICATION_JSON).build();
@@ -228,7 +228,7 @@ public class PasswordProfileStaticREST {
 	@Path("/sites")
 	@Produces({"application/json"})
 	public Response getSites(){
-		PwdAppProfile pwdModel = appProfile;
+		PasswordAppProfile pwdModel = appProfile;
 		Map<String,Site> sites = pwdModel.getSitesMap();
 		
 		return Response.ok().entity(sites).type(MediaType.APPLICATION_JSON).build();
@@ -248,7 +248,7 @@ public class PasswordProfileStaticREST {
 	@Path("/xml")
 	@Produces({ "application/xml" })
 	public Response getPwdUserModel2XML() {
-		PwdAppProfile pwdModel = appProfile;
+		PasswordAppProfile pwdModel = appProfile;
 		return Response.ok().entity(pwdModel).type(MediaType.APPLICATION_XML).build();
 
 	}

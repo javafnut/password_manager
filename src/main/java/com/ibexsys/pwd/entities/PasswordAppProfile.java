@@ -15,9 +15,9 @@ import javax.persistence.Transient;
 
 @Entity
 @Table(name = "UserAppProfile")
-public class PwdAppProfile {
+public class PasswordAppProfile {
 
-	private static PwdAppProfile instance = null;
+	private static PasswordAppProfile instance = null;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -70,16 +70,16 @@ public class PwdAppProfile {
 		return siteMap;
 	}
 
-	protected PwdAppProfile() {
+	protected PasswordAppProfile() {
 
 	}
 
 	// @TODO - Use Spring Singleton
 
-	public static PwdAppProfile getInstance() {
+	public static PasswordAppProfile getInstance() {
 
-		if (PwdAppProfile.instance == null) {
-			instance = new PwdAppProfile();
+		if (PasswordAppProfile.instance == null) {
+			instance = new PasswordAppProfile();
 		}
 
 		return instance;
@@ -224,7 +224,7 @@ public class PwdAppProfile {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		PwdAppProfile other = (PwdAppProfile) obj;
+		PasswordAppProfile other = (PasswordAppProfile) obj;
 		if (appUser == null) {
 			if (other.appUser != null)
 				return false;
