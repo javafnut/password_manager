@@ -14,7 +14,7 @@ public class PasswordFileHandler {
 
 	private ArrayList<Site> siteList;
 	private String pwdFileName;
-	private AppUser appUser;
+	private User appUser;
 
 	public ArrayList<Site> getSitesList() {
 		return siteList;
@@ -32,11 +32,11 @@ public class PasswordFileHandler {
 		pwdFileName = pPwdFileName;
 	}
 
-	public AppUser getAppUser() {
+	public User getAppUser() {
 		return appUser;
 	}
 
-	public void setAppUser(AppUser pAppUser) {
+	public void setAppUser(User pAppUser) {
 		appUser = pAppUser;
 	}
 

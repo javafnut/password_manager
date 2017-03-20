@@ -29,7 +29,7 @@ import javax.ws.rs.core.UriInfo;
 
 import org.springframework.stereotype.Component;
 
-import com.ibexsys.pwd.entities.AppUser;
+import com.ibexsys.pwd.entities.User;
 import com.ibexsys.pwd.entities.Category;
 import com.ibexsys.pwd.entities.PasswordAppProfile;
 import com.ibexsys.pwd.entities.Site;
@@ -67,7 +67,7 @@ public class PasswordProfileStaticREST {
 		appProfile.setModifiedDTM(appProfile.getCreatedDTM());
 		appProfile.setLastLoginDTM(appProfile.getCreatedDTM());
 
-		AppUser user = new AppUser();
+		User user = new User();
 		user.setUserId(1000);
 		user.setFirstName("Todd");
 		user.setLastName("Johnston");
@@ -184,7 +184,7 @@ public class PasswordProfileStaticREST {
 	@Path("/user")
 	@Produces({"application/json"})
 	public Response getAppUserInfo(){
-		AppUser user = appProfile.getAppUser();
+		User user = appProfile.getAppUser();
 		
 	    return Response.ok().entity(user).type(MediaType.APPLICATION_JSON).build();
 	}

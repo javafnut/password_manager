@@ -2,16 +2,20 @@ package com.ibexsys.pwd.entities;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Column;
 import javax.persistence.GenerationType;
 import javax.persistence.Transient;
+import static javax.persistence.CascadeType.*;
 
 @Entity
 @Table(name = "UserAppProfile")
@@ -25,7 +29,7 @@ public class PasswordAppProfile {
 	private Integer profileId;
 
 	@Column(name = "UserId")
-	private Integer appUserId;
+	private Integer userId;
 
 	@Column(name = "CategoryRootId")
 	private Integer rootId;
@@ -50,9 +54,13 @@ public class PasswordAppProfile {
 	// "TINYINT(1)")
 	// private boolean isAccountLocked;
 
+    // With @OneToMany annotation, you can specify cascade option
+    //@OneToMany(cascade=ALL)
+	//@OneToMany
 	@Transient
-	private List<Site> siteList;
+	private List<Site> siteList = new ArrayList<Site>();
 
+	
 	@Transient
 	private Map<String, Site> siteMap;
 
@@ -62,8 +70,8 @@ public class PasswordAppProfile {
 	@Transient
 	private String pwdFileName;
 
-	@Transient
-	private AppUser appUser;
+    @Transient
+	private User user;
 
 	@Transient
 	public Map<String, Site> getSitesMap() {
@@ -92,21 +100,24 @@ public class PasswordAppProfile {
 	public void addSite(Site site) throws Exception {
 
 		// @TODO - Exception
-		if (site == null || appUser == null)
+		if (site == null || user == null)
 			throw new Exception("Either Site or AppUser is Null");
 
 		if (siteMap != null) {
 			siteMap.put(String.valueOf(site.getSiteId()), site);
+		    
 		} else {
 			siteMap = new ConcurrentHashMap<String, Site>();
 			siteMap.put(String.valueOf(site.getSiteId()), site);
 		}
+		
+	    this.getSiteList().add(site);
 	}
 
 	public void addCategory(Category category) throws Exception {
 
 		// @TODO - Exception
-		if (category == null || appUser == null)
+		if (category == null || user == null)
 			throw new Exception("Either Category or AppUser is Null");
 
 		if (categoryMap != null) {
@@ -142,11 +153,11 @@ public class PasswordAppProfile {
 	}
 
 	public Integer getAppUserId() {
-		return appUserId;
+		return userId;
 	}
 
 	public void setAppUserId(Integer appUserId) {
-		this.appUserId = appUserId;
+		this.userId = appUserId;
 	}
 
 	public Integer getRootId() {
@@ -173,12 +184,12 @@ public class PasswordAppProfile {
 		this.lastLoginDTM = lastLoginDTM;
 	}
 
-	public AppUser getAppUser() {
-		return appUser;
+	public User getAppUser() {
+		return user;
 	}
 
-	public void setAppUser(AppUser appUser) {
-		this.appUser = appUser;
+	public void setAppUser(User appUser) {
+		this.user = appUser;
 	}
 
 	public Timestamp getCreatedDTM() {
@@ -196,13 +207,23 @@ public class PasswordAppProfile {
 	public void setModifiedDTM(Timestamp modifiedDTM) {
 		this.modifiedDTM = modifiedDTM;
 	}
+	
+	
+	public List<Site> getSiteList() {
+		return siteList;
+	}
+
+	public void setSiteList(List<Site> siteList) {
+		this.siteList = siteList;
+	}
+	
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((appUser == null) ? 0 : appUser.hashCode());
-		result = prime * result + ((appUserId == null) ? 0 : appUserId.hashCode());
+		result = prime * result + ((user == null) ? 0 : user.hashCode());
+		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
 		result = prime * result + ((categoryMap == null) ? 0 : categoryMap.hashCode());
 		result = prime * result + ((createdDTM == null) ? 0 : createdDTM.hashCode());
 		result = prime * result + ((lastLoginDTM == null) ? 0 : lastLoginDTM.hashCode());
@@ -225,15 +246,15 @@ public class PasswordAppProfile {
 		if (getClass() != obj.getClass())
 			return false;
 		PasswordAppProfile other = (PasswordAppProfile) obj;
-		if (appUser == null) {
-			if (other.appUser != null)
+		if (user == null) {
+			if (other.user != null)
 				return false;
-		} else if (!appUser.equals(other.appUser))
+		} else if (!user.equals(other.user))
 			return false;
-		if (appUserId == null) {
-			if (other.appUserId != null)
+		if (userId == null) {
+			if (other.userId != null)
 				return false;
-		} else if (!appUserId.equals(other.appUserId))
+		} else if (!userId.equals(other.userId))
 			return false;
 		if (categoryMap == null) {
 			if (other.categoryMap != null)
@@ -290,10 +311,10 @@ public class PasswordAppProfile {
 
 	@Override
 	public String toString() {
-		return "PwdAppProfile [profileId=" + profileId + ", appUserId=" + appUserId + ", rootId=" + rootId
+		return "PwdAppProfile [profileId=" + profileId + ", appUserId=" + userId + ", rootId=" + rootId
 				+ ", loginName=" + loginName + ", lastLoginDTM=" + lastLoginDTM + ", createdDTM=" + createdDTM
 				+ ", modifiedDTM=" + modifiedDTM + ", siteList=" + siteList + ", siteMap=" + siteMap + ", categoryMap="
-				+ categoryMap + ", pwdFileName=" + pwdFileName + ", appUser=" + appUser + "]";
+				+ categoryMap + ", pwdFileName=" + pwdFileName + ", appUser=" + user + "]";
 	}
 
 }

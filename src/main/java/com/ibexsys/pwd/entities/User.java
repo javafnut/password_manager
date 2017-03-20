@@ -15,9 +15,9 @@ import javax.persistence.GenerationType;
 
 
 @Entity
-@Table(name = "AppUser")
+@Table(name = "User")
 //@SequenceGenerator(name = "userId_gen", sequenceName = "userId_gen",  initialValue = 1000)
-public class AppUser implements Serializable{
+public class User implements Serializable{
 
 	private static final long serialVersionUID = -6528351877018119894L;
 	
@@ -134,7 +134,7 @@ public class AppUser implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		AppUser other = (AppUser) obj;
+		User other = (User) obj;
 		if (createdDTM == null) {
 			if (other.createdDTM != null)
 				return false;

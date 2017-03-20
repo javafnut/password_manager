@@ -19,7 +19,7 @@ public class PasswordUserModel {
 	private Map<String,Site> siteMap;
 	private Map<String, Category> categoryMap;
 	private String pwdFileName;
-	private AppUser appUser;
+	private User appUser;
 
 //	public List<Site> getSitesList() {
 //		return siteList;
@@ -98,11 +98,11 @@ public class PasswordUserModel {
 		pwdFileName = pPwdFileName;
 	}
 
-	public AppUser getAppUser() {
+	public User getAppUser() {
 		return appUser;
 	}
 
-	public void setAppUser(AppUser pAppUser) {
+	public void setAppUser(User pAppUser) {
 		appUser = pAppUser;
 	}
 

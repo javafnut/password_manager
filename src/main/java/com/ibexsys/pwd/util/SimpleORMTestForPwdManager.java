@@ -42,7 +42,7 @@ public class SimpleORMTestForPwdManager {
 		appProfile.setLastLoginDTM(testTimestamp);
 		
 		
-		AppUser user = new AppUser();
+		User user = new User();
 		user.setFirstName("Todd");
 		user.setLastName("Johnston");
 		user.setEmail("foo@foobar.com");
@@ -83,7 +83,7 @@ public class SimpleORMTestForPwdManager {
 		site.setCreatedDTM(testTimestamp);
 		site.setModifiedDTM(site.getCreatedDTM());
 		
-	    em.persist(site);
+	    //em.persist(site);
 	    em.persist(appProfile);
 	    
 		em.getTransaction().commit();
@@ -116,7 +116,7 @@ public class SimpleORMTestForPwdManager {
         emf.close();
 
         // Display the table for verification
-        JPAUtil.checkData("select * from AppUser");
+        JPAUtil.checkData("select * from User");
         JPAUtil.checkData("select * from Category");
         JPAUtil.checkData("Select * from Site");
         JPAUtil.checkData("select * from UserAppProfile");

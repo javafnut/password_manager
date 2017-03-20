@@ -31,8 +31,8 @@ public class Site implements Serializable {
 	@Column(name = "CatId")
 	private Integer catId;
 	
-	@Column(name = "AppUserId")
-	private Integer appUserId;
+	@Column(name = "UserId")
+	private Integer userId;
 
 	@Column(name = "SiteURL")
 	private String siteURL;
@@ -78,11 +78,11 @@ public class Site implements Serializable {
 	}
 
 	public Integer getAppUserId() {
-		return appUserId;
+		return userId;
 	}
 
 	public void setAppUserId(Integer appUserId) {
-		this.appUserId = appUserId;
+		this.userId = appUserId;
 	}
 
 	public String getSiteURL() {
@@ -141,7 +141,7 @@ public class Site implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((appUserId == null) ? 0 : appUserId.hashCode());
+		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
 		result = prime * result + ((catId == null) ? 0 : catId.hashCode());
 		result = prime * result + ((createdDTM == null) ? 0 : createdDTM.hashCode());
 		result = prime * result + ((login == null) ? 0 : login.hashCode());
@@ -165,10 +165,10 @@ public class Site implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Site other = (Site) obj;
-		if (appUserId == null) {
-			if (other.appUserId != null)
+		if (userId == null) {
+			if (other.userId != null)
 				return false;
-		} else if (!appUserId.equals(other.appUserId))
+		} else if (!userId.equals(other.userId))
 			return false;
 		if (catId == null) {
 			if (other.catId != null)
@@ -218,7 +218,7 @@ public class Site implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Site [siteId=" + siteId + ", siteName=" + siteName + ", catId=" + catId + ", appUserId=" + appUserId
+		return "Site [siteId=" + siteId + ", siteName=" + siteName + ", catId=" + catId + ", appUserId=" + userId
 				+ ", siteURL=" + siteURL + ", siteLogin=" + login + ", password=" + Arrays.toString(password)
 				+ ", notes=" + notes + ", createdDTM=" + createdDTM + ", modifiedDTM=" + modifiedDTM + "]";
 	}
