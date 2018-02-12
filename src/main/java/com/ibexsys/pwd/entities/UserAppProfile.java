@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -61,10 +62,10 @@ public class UserAppProfile {
 //	private Byte isAccountLocked;
 
     // With @OneToMany annotation, you can specify cascade option
-    @OneToMany(cascade=ALL)
+     @OneToMany(cascade=ALL)
+//    @ManyToOne(cascade=ALL)
     @JoinColumn(name="UserId")
-	@Transient
-	//@OneToMany
+//	@Transient
 	private List<Site> siteList = new ArrayList<Site>();
 
 	
@@ -78,6 +79,8 @@ public class UserAppProfile {
 	private String pwdFileName;
 
     @Transient
+//	@OneToOne(cascade=ALL)
+//	@JoinColumn(name="UserId")
 	private User user;
 
 	//@Transient
@@ -85,9 +88,6 @@ public class UserAppProfile {
 		return siteMap;
 	}
 
-	protected UserAppProfile() {
-
-	}
 
 	// @TODO - Use Spring Singleton
 	public static UserAppProfile getInstance() {
@@ -234,7 +234,6 @@ public class UserAppProfile {
 	}
 
 	
-
 	public User getUser() {
 		return user;
 	}

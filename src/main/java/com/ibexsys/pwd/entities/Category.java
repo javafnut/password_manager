@@ -16,7 +16,7 @@ public class Category implements Serializable {
 
 	private static final long serialVersionUID = -9036879502053475149L;
 	public static final String ROOT_NAME = "ROOT";
-	public static final Integer NO_ID = 0;
+	public static final Integer NO_ID = 10;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
