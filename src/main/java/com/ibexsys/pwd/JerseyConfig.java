@@ -2,10 +2,10 @@ package com.ibexsys.pwd;
 
 import javax.ws.rs.ApplicationPath;
 
-import com.ibexsys.pwd.test.PasswordProfileStaticREST;
-
 import org.glassfish.jersey.server.ResourceConfig;
 import org.springframework.stereotype.Component;
+
+import com.ibexsys.pwd.util.PasswordProfileStaticREST;
 
 @Component
 @ApplicationPath("/pwdmanager")

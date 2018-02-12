@@ -21,7 +21,7 @@ public class Category implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "CatId")
-	private Integer catID;
+	private Integer catId;
 	
 	@Column(name = "ParentId")
 	private Integer parentId;
@@ -43,12 +43,12 @@ public class Category implements Serializable {
 	// @Temporal(TemporalType.TIMESTAMP)
 	private Timestamp modifiedDTM;
 
-	public Integer getCatID() {
-		return catID;
+	public Integer getCatId() {
+		return catId;
 	}
 
-	public void setCatID(Integer catID) {
-		this.catID = catID;
+	public void setCatId(Integer catID) {
+		this.catId = catID;
 	}
 
 	public String getName() {
@@ -103,7 +103,7 @@ public class Category implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((catID == null) ? 0 : catID.hashCode());
+		result = prime * result + ((catId == null) ? 0 : catId.hashCode());
 		result = prime * result + ((childId == null) ? 0 : childId.hashCode());
 		result = prime * result + ((createdDTM == null) ? 0 : createdDTM.hashCode());
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
@@ -122,10 +122,10 @@ public class Category implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Category other = (Category) obj;
-		if (catID == null) {
-			if (other.catID != null)
+		if (catId == null) {
+			if (other.catId != null)
 				return false;
-		} else if (!catID.equals(other.catID))
+		} else if (!catId.equals(other.catId))
 			return false;
 		if (childId == null) {
 			if (other.childId != null)
@@ -162,7 +162,7 @@ public class Category implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Category [catID=" + catID + ", parentId=" + parentId + ", childId=" + childId + ", name=" + name
+		return "Category [catID=" + catId + ", parentId=" + parentId + ", childId=" + childId + ", name=" + name
 				+ ", description=" + description + ", createdDTM=" + createdDTM + ", modifiedDTM=" + modifiedDTM + "]";
 	}
 

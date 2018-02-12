@@ -12,8 +12,6 @@ import javax.persistence.GenerationType;
 import java.util.Arrays;
 import java.sql.Timestamp;
 
-
-
 @Entity
 @Table(name = "Site")
 public class Site implements Serializable {

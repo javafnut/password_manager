@@ -8,9 +8,10 @@ http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
   <persistence-unit name="PwdManagerDbService" transaction-type="RESOURCE_LOCAL">
     <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
     
-    <class>com.ibexsys.pwd.model.AppUser</class>
-    <class>com.ibexsys.pwd.model.Category</class>
-    <class>com.ibexsys.pwd.model.Site</class>
+    <class>com.ibexsys.pwd.entities.AppUser</class>
+    <class>com.ibexsys.pwd.entities.Category</class>
+    <class>com.ibexsys.pwd.entities.Site</class>
+    <class>com.ibexsys.pwd.entities.UserAppProfile</class>
  
      <properties>
       <!-- Configuring JDBC properties -->

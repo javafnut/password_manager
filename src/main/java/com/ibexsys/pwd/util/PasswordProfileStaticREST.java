@@ -1,39 +1,26 @@
-package com.ibexsys.pwd.test;
+package com.ibexsys.pwd.util;
 
-import java.sql.Date;
-import java.sql.Timestamp;
-import java.util.List;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
-import java.util.ArrayList;
+import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Map;
 import java.util.Random;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.WebApplicationException;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriBuilder;
-import javax.ws.rs.core.UriInfo;
 
 import org.springframework.stereotype.Component;
 
-import com.ibexsys.pwd.entities.User;
 import com.ibexsys.pwd.entities.Category;
-import com.ibexsys.pwd.entities.PasswordAppProfile;
+import com.ibexsys.pwd.entities.UserAppProfile;
 import com.ibexsys.pwd.entities.Site;
-
+import com.ibexsys.pwd.entities.User;
 import com.ibexsys.pwd.services.PasswordEncryptionService;
 
 @Component
@@ -41,7 +28,7 @@ import com.ibexsys.pwd.services.PasswordEncryptionService;
 public class PasswordProfileStaticREST {
 
 	private static AtomicInteger idCounter = new AtomicInteger();
-	private static PasswordAppProfile appProfile = PasswordAppProfile.getInstance();
+	private static UserAppProfile appProfile = UserAppProfile.getInstance();
 
 	static {
 
@@ -83,16 +70,16 @@ public class PasswordProfileStaticREST {
 
 		// Setup root category, all id's are set to ROOT_ID
 		Category category = new Category();
-		category.setCatID(user.getUserId());
+		category.setCatId(user.getUserId());
 		category.setChildId(Category.NO_ID); // ROOT is it's own child by
 												// design
-		category.setParentId(category.getCatID());
+		category.setParentId(category.getCatId());
 		category.setDescription(Category.ROOT_NAME);
 		category.setName(Category.ROOT_NAME);
 		category.setCreatedDTM(new Timestamp(Calendar.getInstance().getTimeInMillis()));
 		category.setModifiedDTM(category.getCreatedDTM());
 		
-		appProfile.setRootId(category.getCatID());
+		appProfile.setRootId(category.getCatId());
 
 		try {
 			appProfile.addCategory(category);
@@ -107,7 +94,7 @@ public class PasswordProfileStaticREST {
 
 			Integer id = new Integer(101 + i);
 			Category cat = new Category();
-			cat.setCatID(id);
+			cat.setCatId(id);
 			cat.setChildId(id);
 			cat.setParentId(Category.NO_ID);
 			cat.setDescription(id + "- Description");
@@ -127,7 +114,7 @@ public class PasswordProfileStaticREST {
 			Site site = new Site();
 			site.setSiteId(new Integer(idCounter.incrementAndGet()));
 			site.setAppUserId(user.getUserId());
-			site.setCatId(cat.getCatID());
+			site.setCatId(cat.getCatId());
 			site.setSiteName("My_Site_Name_" + site.getSiteId());
 			site.setSiteURL("http://foobar.com/foobar");
 			site.setNotes("My_Site_Notes_" + site.getSiteId());
@@ -160,7 +147,7 @@ public class PasswordProfileStaticREST {
 	@Produces({"application/json"})
 	public Response getUserAppProfile(){
 
-		PasswordAppProfile pwdModel = appProfile;	
+		UserAppProfile pwdModel = appProfile;	
 		
      return Response.ok().entity(pwdModel).type(MediaType.APPLICATION_JSON).build();
      
@@ -172,7 +159,7 @@ public class PasswordProfileStaticREST {
 	@Produces({"application/json"})
 	public Response getUserAppProfileInfo(){
 
-		PasswordAppProfile pwdModel = appProfile;	
+		UserAppProfile pwdModel = appProfile;	
 		
      return Response.ok().entity(pwdModel).type(MediaType.APPLICATION_JSON).build();
      
@@ -203,7 +190,7 @@ public class PasswordProfileStaticREST {
 	@Produces({"application/json"})
 	public Response getCategory(@PathParam("id") String id){
 		
-		PasswordAppProfile pwdModel = appProfile;
+		UserAppProfile pwdModel = appProfile;
 
 		Category category = (Category) pwdModel.getCategoryMap().get(id);
 		
@@ -217,7 +204,7 @@ public class PasswordProfileStaticREST {
 	@Path("/site/{id}")
 	@Produces({"application/json"})
 	public Response getSite(@PathParam("id") String id){
-		PasswordAppProfile pwdModel = appProfile;
+		UserAppProfile pwdModel = appProfile;
 		Site site = (Site) pwdModel.getSitesMap().get(id);
 		
 		return Response.ok().entity(site).type(MediaType.APPLICATION_JSON).build();
@@ -228,27 +215,28 @@ public class PasswordProfileStaticREST {
 	@Path("/sites")
 	@Produces({"application/json"})
 	public Response getSites(){
-		PasswordAppProfile pwdModel = appProfile;
+		UserAppProfile pwdModel = appProfile;
 		Map<String,Site> sites = pwdModel.getSitesMap();
 		
 		return Response.ok().entity(sites).type(MediaType.APPLICATION_JSON).build();
 	}
 	
 
-//	// Static Dump
-//	@GET
-//	@Produces({ "application/json" })
-//	public Response getPwdUserModel() {
-//		PwdAppProfile pwdModel = appProfile;
-//		return Response.ok().entity(pwdModel).type(MediaType.APPLICATION_JSON).build();
-//
-//	}
+	// Static Dump
+	@GET
+	@Produces({ "application/json" })
+	@Path("/json")
+	public Response getPwdUserModel() {
+		UserAppProfile pwdModel = appProfile;
+		return Response.ok().entity(pwdModel).type(MediaType.APPLICATION_JSON).build();
+
+	}
 
 	@GET
 	@Path("/xml")
 	@Produces({ "application/xml" })
 	public Response getPwdUserModel2XML() {
-		PasswordAppProfile pwdModel = appProfile;
+		UserAppProfile pwdModel = appProfile;
 		return Response.ok().entity(pwdModel).type(MediaType.APPLICATION_XML).build();
 
 	}

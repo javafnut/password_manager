@@ -10,7 +10,8 @@ import javax.persistence.Persistence;
 
 import com.ibexsys.pwd.entities.*;
 import com.ibexsys.pwd.services.PasswordEncryptionService;
-import com.ibexsys.pwd.util.JPAUtil;
+import com.ibexsys.pwd.services.PasswordGeneratorService;
+import com.ibexsys.pwd.util.JdbcUtils;
 
 public class SimpleORMTestForPwdManager {
 	
@@ -35,11 +36,13 @@ public class SimpleORMTestForPwdManager {
 		
 		em.getTransaction().begin();
 
-		PasswordAppProfile appProfile = PasswordAppProfile.getInstance();
+		UserAppProfile appProfile = UserAppProfile.getInstance();
 		appProfile.setLoginName("FooBarLogin");
 		appProfile.setCreatedDTM(testTimestamp);
 		appProfile.setModifiedDTM(appProfile.getCreatedDTM());
 		appProfile.setLastLoginDTM(testTimestamp);
+		//appProfile.setIsActive(true);
+		//appProfile.setAccountLocked(false);
 		
 		
 		User user = new User();
@@ -68,22 +71,34 @@ public class SimpleORMTestForPwdManager {
 		em.persist(category);
  
 		// Now setup the root category, root is it's own parent
-		category.setParentId(category.getCatID());
-		appProfile.setRootId(category.getCatID());
+		category.setParentId(category.getCatId());
+		appProfile.setRootId(category.getCatId());
 	
 		em.persist(category);
-
-		Site site = new Site();
+		
+        
+		
+        String testPwd = "&*0ThisISAtestPwd";
+        try {
+			lSalt = PasswordEncryptionService.generateSalt();
+			lEncPwd = PasswordEncryptionService.getEncryptedPassword(testPwd, lSalt);
+		} catch (Exception e) {
+			System.out.println(e.getStackTrace());
+		}
+        
+  		Site site = new Site();
 		site.setAppUserId(user.getUserId());
-		site.setCatId(category.getCatID());
+		site.setCatId(category.getCatId());
 		site.setSiteName("My_Site_Name_" );
+		site.setLogin(site.getSiteName().concat("_").concat(user.getFirstName()));
+		site.setPassword(lEncPwd);
 		site.setSiteURL("http://foobar.com/foobar");
 		site.setNotes("My_Site_Notes_");
 		site.setLogin("Login_Name_");
 		site.setCreatedDTM(testTimestamp);
 		site.setModifiedDTM(site.getCreatedDTM());
-		
-	    //em.persist(site);
+	
+		em.persist(site);
 	    em.persist(appProfile);
 	    
 		em.getTransaction().commit();
@@ -92,10 +107,10 @@ public class SimpleORMTestForPwdManager {
 
     public static void DeleteData(){
 
-    	JPAUtil.simpleDelete("delete from AppUser");
-    	JPAUtil.simpleDelete("delete from Category");
-    	JPAUtil.simpleDelete("delete from Site");
-    	JPAUtil.simpleDelete("delete from UserAppProfile");
+    	JdbcUtils.simpleDelete("delete from User");
+    	JdbcUtils.simpleDelete("delete from Category");
+    	JdbcUtils.simpleDelete("delete from Site");
+    	JdbcUtils.simpleDelete("delete from UserAppProfile");
     }
 	
 	
@@ -116,10 +131,10 @@ public class SimpleORMTestForPwdManager {
         emf.close();
 
         // Display the table for verification
-        JPAUtil.checkData("select * from User");
-        JPAUtil.checkData("select * from Category");
-        JPAUtil.checkData("Select * from Site");
-        JPAUtil.checkData("select * from UserAppProfile");
+        JdbcUtils.checkData("select * from User");
+        JdbcUtils.checkData("select * from Category");
+        JdbcUtils.checkData("Select * from Site");
+        JdbcUtils.checkData("select * from UserAppProfile");
         
         
 

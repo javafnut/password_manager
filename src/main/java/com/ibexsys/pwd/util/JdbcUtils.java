@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.Statement;
 
-public class JPAUtil {
+public class JdbcUtils {
 
 
 

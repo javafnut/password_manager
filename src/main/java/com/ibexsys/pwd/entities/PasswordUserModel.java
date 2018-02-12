@@ -15,6 +15,7 @@ public class PasswordUserModel {
 	@XmlElementWrapper(name = "UserSiteList")
 	@XmlElement(name = "Site")
 
+
 	private List<Site> siteList;
 	private Map<String,Site> siteMap;
 	private Map<String, Category> categoryMap;
@@ -74,10 +75,10 @@ public class PasswordUserModel {
 
 		
 		if (categoryMap != null) {
-			categoryMap.put(String.valueOf(category.getCatID()) , category);
+			categoryMap.put(String.valueOf(category.getCatId()) , category);
 		} else {
 			categoryMap = new ConcurrentHashMap<String,Category>();
-			categoryMap.put(String.valueOf(category.getCatID()),category);
+			categoryMap.put(String.valueOf(category.getCatId()),category);
 		}
 	}
 
